@@ -18,7 +18,7 @@ class usuario(models.Model):
 
 class oferecerCarona(models.Model):
 
-    dataOferecer = models.DateTimeField(auto_now=True)
+    dataOfCarona = models.DateField(null=True, blank=True)
     destino = models.CharField(max_length=255)
     partida = models.CharField(max_length=255)
     quantidadeVagas = models.IntegerField('quantidade de vagas')
@@ -29,7 +29,7 @@ class oferecerCarona(models.Model):
         db_table = 'oferecerCarona'
 
 class pedirCarona(models.Model):
-    dataPedir = models.DateTimeField(auto_now=True)
+    dataPedCarona = models.DateField(null=True, blank=True)
     quantidadeVagas = models.IntegerField('quantidade de vagas')
     destino = models.CharField(max_length=255)
     buscarCarona = models.CharField(max_length=255)
