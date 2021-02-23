@@ -7,6 +7,7 @@ class usuario(models.Model):
     email = models.EmailField()
     senha = models.CharField(max_length=50)
     foto = models.ImageField(upload_to="media/%y/%m",blank=True,null=True)
+    active = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

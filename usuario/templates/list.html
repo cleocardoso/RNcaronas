@@ -1,0 +1,9 @@
+{%extends "model-page.html"%}
+
+{% block content %}
+    {% for u in user %}
+        {{u.nome}}
+        {{u.email}}
+    {% endfor %}
+<p>oi</p>
+{% endblock%}
