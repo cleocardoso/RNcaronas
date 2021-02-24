@@ -6,7 +6,7 @@ class usuario(models.Model):
     nome = models.CharField(max_length=255)
     email = models.EmailField()
     senha = models.CharField(max_length=50)
-    foto = models.ImageField(upload_to="media/%y/%m",blank=True,null=True)
+    foto = models.ImageField(upload_to="user",blank=True,null=True)
     active = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

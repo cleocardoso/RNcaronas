@@ -1,9 +1,35 @@
-{%extends "model-page.html"%}
+{% extends "model-page.html" %}
+
+{% block style %}
+    <style>
+        div.polaroid {
+            width: 250px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: center;
+        }
+        div.container {
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
-    {% for u in user %}
-        {{u.nome}}
-        {{u.email}}
-    {% endfor %}
-<p>oi</p>
-{% endblock%}
+    <div class="container">
+            <div class="row">
+                {% for u in user %}
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <!--<a href="../detail/{{ u.id }}">-->
+                          <div class="polaroid" >
+                                <!-- <img src="{{ u.foto.url }}" style="width=100%">-->
+                                <div class="container">
+                                    <p>{{ u.nome }}</p>
+                                </div>
+                           </div>
+                       <!-- </a> -->
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
