@@ -19,16 +19,18 @@ from usuario import views
 from django.views.generic import RedirectView
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 from . import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('usuario/list', views.list_all_usuario),
-    path('usuario/user', views.list_user_usuario),
+    path('usurious/list', views.list_all_usurious),
+    path('usurious/user', views.list_user_usurious),
     path('login/', views.login_user),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
-    path('usuario/register', views.register_usuario),
-    path('usuario/register/submit', views.set_usuario),
-    path('', RedirectView.as_view(url='usuario/list'))
+    path('usurious/register', views.register_usurious),
+    path('usurious/register/submit', views.set_usurious),
+    path('usurious/index', views.index_usurious),
+    path('', RedirectView.as_view(url='usurious/index'))
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

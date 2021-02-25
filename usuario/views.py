@@ -8,26 +8,28 @@ from .models import usuario
 # Create your views here.
 
 @login_required(login_url='/login/')
-def register_usuario(request):
+def register_usurious(request):
     return render(request, 'register.html')
 
 @login_required(login_url='/login/')
-def set_usuario(request):
+def set_usurious(request):
     nome = request.POST.get('nome')
     email = request.POST.get('email')
     senha = request.POST.get('senha')
     foto = request.FILES.get('file')
     user = request.user
-    usuario1 = usuario.objects.create(email=email, nome=nome, senha=senha, foto=foto, user=user)
-    return redirect("/")
+    print(nome, email, senha)
+    retorno = usuario.objects.create(email=email, nome=nome, senha=senha, foto=foto, user=user)
+
+    return redirect("/usurious/list")
 
 @login_required(login_url='/login/')
-def list_all_usuario(request):#listando os usuarios
+def list_all_usurious(request):#listando os usuarios
     user = usuario.objects.filter(active=True)
-    #print(user.query)
+    print(user.query)
     return render(request, 'list.html', {'user': user})#passando um dicionario
 
-def list_user_usuario(request):
+def list_user_usurious(request):
     user = usuario.objects.filter(active=True, user=request.user)
     return render(request, 'list.html', {'user': user})
 
@@ -35,7 +37,10 @@ def logout_user(request):
     logout(request)
     return redirect('/login/')
 def login_user(request):
-    return  render(request, 'login.html')
+    return render(request, 'login.html')
+
+def index_usurious(request):
+    return render(request, 'index.html')
 
 @csrf_protect
 def submit_login(request):
