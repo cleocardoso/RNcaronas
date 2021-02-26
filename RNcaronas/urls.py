@@ -29,6 +29,8 @@ urlpatterns = [
     path('logout/', views.logout_user),
     path('usurious/register', views.register_usurious),
     path('usurious/register/submit', views.set_usurious),
+    path('usurious/oferecercarona', views.oferecercarona_usurious),
+    path('usurious/listOferecerCarona', views.list_OferecerCarona),
     path('usurious/index', views.index_usurious),
     path('', RedirectView.as_view(url='usurious/index'))
 ]
