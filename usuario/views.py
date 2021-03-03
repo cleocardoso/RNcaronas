@@ -24,11 +24,16 @@ class usuarioViewSet(viewsets.ModelViewSet):
 
 
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
+## essa anotação terá acesso a rota se realizar o login
 def register_usurious(request):
     return render(request, 'register.html')
 
 @login_required(login_url='/login/')
+def oferecercarona_usurious(request):
+    return render(request, 'oferecerCarona.html')
+
+#@login_required(login_url='/login/')
 def set_usurious(request):
     nome = request.POST.get('nome')
     email = request.POST.get('email')
@@ -59,16 +64,20 @@ def set_usurious(request):
     # aqui  retonar o usuario, para ele apenas mudar o email
     return redirect('/usurious/register')
 
-def oferecercarona_usurious(request):
+@login_required(login_url='/login/')
+def set_oferecercarona_usurious(request):
     dataOfCarona = request.POST.get('dataOfCarona')
     destino = request.POST.get('destino')
     partida = request.POST.get('partida')
     quantidadeVagas = request.POST.get('quantidadeVagas')
     valorCarona = request.POST.get('valorCarona')
     #usuario = request.usuario
-    #print(dataOfCarona, destino, partida ,quantidadeVagas, valorCarona)
+    print(dataOfCarona, destino, partida ,quantidadeVagas, valorCarona)
     res = oferecerCarona.objects.create(dataOfCarona=dataOfCarona, destino=destino, partida=partida,  quantidadeVagas=quantidadeVagas, valorCarona=valorCarona)
-    return redirect("usurious/oferecerCarona")
+
+    res.save()
+
+    return redirect('usurious/oferecerCarona')
 
 def list_OferecerCarona(request):#listando os usuarios
     ofcarona = oferecerCarona.objects.filter()

@@ -8,7 +8,7 @@ class usuario(models.Model):
     senha = models.CharField(max_length=50)
     foto = models.ImageField(upload_to="user", blank=True, null=True)
     active = models.BooleanField(default=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
 
@@ -18,13 +18,13 @@ class usuario(models.Model):
         db_table = 'usuario'
 
 class oferecerCarona(models.Model):
-
     dataOfCarona = models.DateField(null=True, blank=True)
-    destino = models.CharField(max_length=255)
-    partida = models.CharField(max_length=255)
-    quantidadeVagas = models.IntegerField('quantidade de vagas')
-    valorCarona = models.DecimalField('valor', max_digits=7, decimal_places=2)
-    usuario = models.ForeignKey(usuario, on_delete=models.CASCADE)
+    destino = models.CharField(max_length=255, blank=True, null=True)
+    partida = models.CharField(max_length=255, blank=True, null=True)
+    quantidadeVagas = models.IntegerField('quantidade de vagas', blank=True, null=True)
+    valorCarona = models.DecimalField('valor', max_digits=7, decimal_places=2, blank=True, null=True)
+    usuario = models.ForeignKey("usuario", on_delete=models.CASCADE, related_name='oferecerCarona')
+
 
     class Meta:
         db_table = 'oferecerCarona'

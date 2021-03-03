@@ -29,7 +29,7 @@ router = routers.DefaultRouter()
 router.register(r'usurious', usuarioViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('usuario-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     path('usurious/list', views.list_all_usurious),
@@ -39,8 +39,9 @@ urlpatterns = [
     path('logout/', views.logout_user),
     path('usurious/register', views.register_usurious),
     path('usurious/register/submit', views.set_usurious),
-    path('usurious/oferecercarona', views.oferecercarona_usurious),
-    path('usurious/listOferecerCarona', views.list_OferecerCarona),
+    path('usurious/oferecerCarona/', views.oferecercarona_usurious),
+    path('usurious/oferecerCarona/submit', views.set_oferecercarona_usurious),
+    path('usurious/listOferecercarona', views.list_OferecerCarona),
     path('usurious/index', views.index_usurious),
     path('', RedirectView.as_view(url='usurious/index'))
 ]

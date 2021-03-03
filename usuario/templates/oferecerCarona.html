@@ -14,7 +14,7 @@ align-items: center">
                         <p class="card-category">Ofereça sua carona aqui!</p>
                     </div>
                     <div class="card-body">
-                        <form enctype="multipart/form-data" action="register/submit" , method="POST">
+                        <form enctype="multipart/form-data" action="/usurious/oferecerCarona/submit" , method="POST">
                             {%csrf_token %}
                             <div class="row">
 
@@ -31,7 +31,7 @@ align-items: center">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Destino </label>
-                                        <input name="destino" type="email" class="form-control">
+                                        <input name="destino" type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@ align-items: center">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating" for="dataOfCarona">Data:</label>
-                                        <input name="dataOfCarona" type="datetime-local" class="form-control" id="dataOfCarona">
+                                        <input name="dataOfCarona" type="date" class="form-control" id="dataOfCarona">
                                     </div>
                                 </div>
                             </div>

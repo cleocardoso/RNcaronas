@@ -103,7 +103,7 @@
     </form>
     <ul class="nav menu">
         <li class="active"><a class="nav-link" href="/usurious/register"><em class="fa fa-dashboard">&nbsp;</em>Cadastre-se</a></li>
-        <li><a class="nav-link" href="/usurious/oferecercarona"><em class="fa fa-calendar">&nbsp;</em>Oferecer Carona</a></li>
+        <li><a class="nav-link" href="/usurious/oferecerCarona"><em class="fa fa-calendar">&nbsp;</em>Oferecer Carona</a></li>
         <li><a href="/logout/"><em class="fa fa-power-off">&nbsp;</em> Sair</a></li>
     </ul>
 </div><!--/.sidebar-->
@@ -112,14 +112,14 @@
 </div>&lt;!&ndash;/.row&ndash;&gt;
 </div>    &lt;!&ndash;/.main&ndash;&gt;-->
 
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/chart.min.js"></script>
-<script src="js/chart-data.js"></script>
-<script src="js/easypiechart.js"></script>
-<script src="js/easypiechart-data.js"></script>
-<script src="js/bootstrap-datepicker.js"></script>
-<script src="js/custom.js"></script>
+<script src="{% static 'js/jquery-1.11.1.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<script src="{% static 'js/chart.min.js'%}"></script>
+<script src="{% static 'js/chart-data.js'%}"></script>
+<script src="{% static 'js/easypiechart.js'%}"></script>
+<script src="{% static 'js/easypiechart-data.js'%}"></script>
+<script src="{% static 'js/bootstrap-datepicker.js'%}"></script>
+<script src="{% static 'js/custom.js'%}"></script>
 <script>
 		window.onload = function () {
 	var chart1 = document.getElementById("line-chart").getContext("2d");

@@ -38,7 +38,7 @@ justify-content: center;
 align-items: center;
 height: 100%;">
 
-    <form role="form">
+    <div role="form">
         <div class="col-md-12">
             <div class="card">
                 {% if messages %}
@@ -51,7 +51,7 @@ height: 100%;">
                     <p class="card-category">Insira seus dados</p>
                 </div>
                 <div class="card-body">
-                    <form enctype="multipart/form-data" action="register/submit" , method="POST">
+                    <form enctype="multipart/form-data" action="register/submit" method="POST">
                         {%csrf_token %}
                         <div class="row">
 
@@ -90,19 +90,20 @@ height: 100%;">
                                 </div>
                             </div>
                         </div>
-                     </form>
-                <br/>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">
-                        Cadastrar
-                    </button>
-                    <br></br>
+                        <br/>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Cadastrar
+                            </button>
+                            <br></br>
+                        </div>
+                    </form>
                 </div>
-
             </div>
+
+
         </div>
-
-
+    </div>
 </div>
 <!--
 <div class="content">
