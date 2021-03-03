@@ -1,177 +1,140 @@
-<!--<title>RNcaronas</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> !-->
 {% load static %}
-<title>RNcaronas</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <!-- Material Kit CSS -->
-  <link href="{% static 'assets/css/material-dashboard.css' %}" rel="stylesheet" />
-    <!-- {% static <- somente para arquivos internos
-<style>
-    #menu a {
-        color: #FFF;
-        background-color: #252525;
-        text-decoration: none;
-        border-bottom: transparent solid 1px;
-        padding-bottom: 5px;
-    }
 
-    #menu a:hover {
-        color: #FFF;
-        background-color: #252525;
-        border-bottom: #00ff00 solid 1px;
-    }
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RN Caronas</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/datepicker3.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
-    .jumbotron.header{
-        background-color: green;
-        color: white;
-        background-image: linear-gradient(green, #003300);
-    }
-</style>
-
-<div class="jumbotron header text-center">
-    <h1>RNcaronas</h1>
-    <p>Encontre sua carona rápida aqui!</p>
-</div>
-<div class="text-right mr-4">
-    <a href="/logout/">Sair</a>
-</div>
-<div id="menu">
-    <ul class="nav ml-4">
-        <li class="nav-item">
-            <a class="nav-link" href="usurious/list">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Oferecer Carona</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/usurious/register">Cadastrar-se</a>
-        </li>
-    </ul>
-</div>
-<br>-->
-
-<body class="dark-edition">
-  <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="{% static 'assets/img/sidebar-2.jpg' %}">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
-      <div class="logo"><a  class="simple-text logo-normal">
-         RNCaronas
-        </a></div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link"  href="/usurious/index">
-              <i class="material-icons">home</i>
-              <p>Home</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="/usurious/register">
-              <i class="material-icons">person</i>
-              <p>Cadastre-se</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="/usurious/oferecercarona">
-              <i class="material-icons">content_paste</i>
-              <p>Oferecer Carona</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./notifications.html">
-              <i class="material-icons">notifications</i>
-              <p>Notifications</p>
-            </a>
-          </li>
-          <!-- <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.html">
-                    <i class="material-icons">unarchive</i>
-                    <p>Upgrade to PRO</p>
+    <!--Custom Font-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/html5shiv.js' %}"></script>
+    <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span></button>
+            <a class="navbar-brand" href="#"><span>RNcaronas</span></a>
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                    <em class="fa fa-envelope"></em><span class="label label-danger">15</span>
                 </a>
-            </li> -->
-        </ul>
-      </div>
-    </div>
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end">
-            <form class="navbar-form">
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-default btn-round btn-just-icon">
-                  <i class="material-icons">search</i>
-                  <div class="ripple-container"></div>
-                </button>
-              </div>
-            </form>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                  <i class="material-icons">dashboard</i>
-                  <p class="d-lg-none d-md-block">
-                    Stats
-                  </p>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
+                                <img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
+                            </a>
+                                <div class="message-body"><small class="pull-right">3 mins ago</small>
+                                    <a href="#"><strong>John Doe</strong> commented on <strong>your photo</strong>.</a>
+                                    <br/><small class="text-muted">1:24 pm - 25/03/2015</small></div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
+                                <img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
+                            </a>
+                                <div class="message-body"><small class="pull-right">1 hour ago</small>
+                                    <a href="#">New message from <strong>Jane Doe</strong>.</a>
+                                    <br/><small class="text-muted">12:27 pm - 25/03/2015</small></div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="all-button"><a href="#">
+                                <em class="fa fa-inbox"></em> <strong>All Messages</strong>
+                            </a></div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                    <em class="fa fa-bell"></em><span class="label label-info">5</span>
                 </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">notifications</i>
-                  <span class="notification">5</span>
-                  <p class="d-lg-none d-md-block">
-                    Some Actions
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="javascript:void(0)">Mike John responded to your email</a>
-                  <a class="dropdown-item" href="javascript:void(0)">You have 5 new tasks</a>
-                  <a class="dropdown-item" href="javascript:void(0)">You're now friend with Andrew</a>
-                  <a class="dropdown-item" href="javascript:void(0)">Another Notification</a>
-                  <a class="dropdown-item" href="javascript:void(0)">Another One</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                  <i class="material-icons">person</i>
-                  <p class="d-lg-none d-md-block">
-                    Account
-                  </p>
-                </a>
-              </li>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li><a href="#">
+                            <div><em class="fa fa-envelope"></em> 1 New Message
+                                <span class="pull-right text-muted small">3 mins ago</span></div>
+                        </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">
+                            <div><em class="fa fa-heart"></em> 12 New Likes
+                                <span class="pull-right text-muted small">4 mins ago</span></div>
+                        </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">
+                            <div><em class="fa fa-user"></em> 5 New Followers
+                                <span class="pull-right text-muted small">4 mins ago</span></div>
+                        </a></li>
+                    </ul>
+                </li>
             </ul>
-          </div>
         </div>
-      </nav>
-      <!-- End Navbar -->
-
+    </div><!-- /.container-fluid -->
+</nav>
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <div class="profile-sidebar">
+        <div class="profile-userpic">
+            <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+        </div>
+        <div class="profile-usertitle">
+            <div class="profile-usertitle-name">Usuario</div>
+            <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+        </div>
+        <div class="clear"></div>
     </div>
-  </div>
+    <div class="divider"></div>
+    <form role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+    </form>
+    <ul class="nav menu">
+        <li class="active"><a class="nav-link" href="/usurious/register"><em class="fa fa-dashboard">&nbsp;</em>Cadastre-se</a></li>
+        <li><a class="nav-link" href="/usurious/oferecercarona"><em class="fa fa-calendar">&nbsp;</em>Oferecer Carona</a></li>
+        <li><a href="/logout/"><em class="fa fa-power-off">&nbsp;</em> Sair</a></li>
+    </ul>
+</div><!--/.sidebar-->
+<!--</div>&lt;!&ndash;/.col&ndash;&gt;
+
+</div>&lt;!&ndash;/.row&ndash;&gt;
+</div>    &lt;!&ndash;/.main&ndash;&gt;-->
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/chart.min.js"></script>
+<script src="js/chart-data.js"></script>
+<script src="js/easypiechart.js"></script>
+<script src="js/easypiechart-data.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/custom.js"></script>
+<script>
+		window.onload = function () {
+	var chart1 = document.getElementById("line-chart").getContext("2d");
+	window.myLine = new Chart(chart1).Line(lineChartData, {
+	responsive: true,
+	scaleLineColor: "rgba(0,0,0,.2)",
+	scaleGridLineColor: "rgba(0,0,0,.05)",
+	scaleFontColor: "#c5c7cc"
+	});
+};
+
+</script>
+
 </body>
+</html>
 
 
 

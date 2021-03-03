@@ -11,72 +11,48 @@
             padding: 10px;
         }
 
+
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="content">
-    <div class="container-fluid">
-        <div class="row" style="display: flex;
+<div class="row" style="display: flex;
 flex-direction: row;
 justify-content: center;
-align-items: center">
+align-items: center ">
 
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Lista de usuarios</h4>
+    <div class="col-md-10" >
+        <div class="card">
+            <div class="card-header card-header-primary" >
+                <h4 class="card-title" >Lista de usuarios</h4>
 
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                <th>
-                                    ID
-                                </th>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Foto
-                                </th>
-                                <th>Detalhe</th>
-                                </thead>
-                                <tbody>
-                                {% for u in user %}
-                                <tr>
-                                    <td>{{ u.id }}</td>
-                                    <td>{{ u.nome }}</td>
-                                    <td><img src="{{ u.foto.url }}" style="width: 95px"></td>
-                                    <td><a class="btn btn-primary" href="../detail/{{ u.id }}">Detalhe</a></td>
-                                </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Foto
+                        </th>
+                        <th>Detalhe</th>
+                        </thead>
+                        <tbody>
+                        {% for u in user %}
+                        <tr>
+                            <td>{{ u.nome }}</td>
+                            <td><img src="{{ u.foto.url }}" style="width: 95px"></td>
+                            <td><a class="btn btn-primary" href="../detail/{{ u.id }}">Detalhe</a></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--<div class="container">
-        <div class="row">
-            {% for u in user %}
-                <div class="col-sm-12 col-md-6 col-lg-4">
-                    &lt;!&ndash;<a href="../detail/{{ u.id }}">&ndash;&gt;
-                      <div class="polaroid" >
-                            &lt;!&ndash; <img src="{{ u.foto.url }}" style="width=100%">&ndash;&gt;
-                            <div class="container">
-                                <p>{{ u.nome }}</p>
-                            </div>
-                       </div>
-                   &lt;!&ndash; </a> &ndash;&gt;
-                    <br>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>-->
+
 {% endblock %}

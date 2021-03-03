@@ -13,14 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 from usuario import views
 from django.views.generic import RedirectView
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
+
+from usuario.views import usuarioViewSet
 from . import settings
 
+router = routers.DefaultRouter()
+router.register(r'usurious', usuarioViewSet)
+
 urlpatterns = [
+    path('', include(router.urls)),
+    path('usuario-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     path('usurious/list', views.list_all_usurious),
     path('usurious/user', views.list_user_usurious),

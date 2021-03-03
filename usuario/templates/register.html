@@ -32,7 +32,79 @@
 
 comando para comentar as linhas ctrl + shift + /
 -->
+<div class="row" style="display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+height: 100%;">
 
+    <form role="form">
+        <div class="col-md-12">
+            <div class="card">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Cadastro de Usuario</h4>
+                    <p class="card-category">Insira seus dados</p>
+                </div>
+                <div class="card-body">
+                    <form enctype="multipart/form-data" action="register/submit" , method="POST">
+                        {%csrf_token %}
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Nome</label>
+                                    <input name="nome" type="text" class="form-control">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Email </label>
+                                    <input name="email" type="email" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating" for="password">Senha:</label>
+                                    <input name="senha" type="password" class="form-control" id="password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="card-avatar">
+                                    <a href="/media/{{ usuario.photo }}" target="_blank">Foto atual</a>
+                                    <input type="file" class="form-control-file border" name="file" accept="image/*">
+
+                                </div>
+                            </div>
+                        </div>
+                     </form>
+                <br/>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        Cadastrar
+                    </button>
+                    <br></br>
+                </div>
+
+            </div>
+        </div>
+
+
+</div>
+<!--
 <div class="content">
     <div class="container-fluid">
         <div class="row" style="display: flex;
@@ -41,6 +113,11 @@ justify-content: center;
 align-items: center">
             <div class="col-md-6">
                 <div class="card">
+                     {% if messages %}
+                      {% for message in messages %}
+                          <div class="alert alert-danger">{{ message }}</div>
+                      {% endfor %}
+                  {% endif %}
                     <div class="card-header card-header-primary">
                         <h4 class="card-title">Cadastro</h4>
                         <p class="card-category">Insira seus dados</p>
@@ -54,7 +131,7 @@ align-items: center">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Nome</label>
                                         <input name="nome" type="text" class="form-control">
-                                        <!-- o name do input é a variavel que o django vai pegar na requisicao -->
+                                        &lt;!&ndash; o name do input é a variavel que o django vai pegar na requisicao &ndash;&gt;
                                     </div>
                                 </div>
 
@@ -77,11 +154,11 @@ align-items: center">
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                   <!-- so eu tirar esse form grup? não, vc precisa coloca o row onde fica col, mas a div tem que está fora da outra row.certo <div class="card-avatar">-->
+                                   &lt;!&ndash; so eu tirar esse form grup? não, vc precisa coloca o row onde fica col, mas a div tem que está fora da outra row.certo <div class="card-avatar">&ndash;&gt;
                                             <a href="/media/{{ usuario.photo }}" target="_blank">Foto atual</a>
                                              <input type="file" class="form-control-file border" name="file" accept="image/*">
-                                    <!--    </div>
-                                    </div>-->
+                                    &lt;!&ndash;    </div>
+                                    </div>&ndash;&gt;
                                 </div>
                             </div>
                             <br />
@@ -96,5 +173,6 @@ align-items: center">
             </div>
         </div>
     </div>
-</div>
+
+</div>-->
 {% endblock  %}
