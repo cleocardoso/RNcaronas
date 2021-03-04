@@ -71,9 +71,11 @@ def set_oferecercarona_usurious(request):
     partida = request.POST.get('partida')
     quantidadeVagas = request.POST.get('quantidadeVagas')
     valorCarona = request.POST.get('valorCarona')
-    #usuario = request.usuario
-    print(dataOfCarona, destino, partida ,quantidadeVagas, valorCarona)
-    res = oferecerCarona.objects.create(dataOfCarona=dataOfCarona, destino=destino, partida=partida,  quantidadeVagas=quantidadeVagas, valorCarona=valorCarona)
+    usuario3 = request.user
+    usuario2 = usuario.objects.get(email=usuario3.email)
+    print("usuario logado = ",usuario2)
+    print(dataOfCarona, destino, partida, quantidadeVagas, valorCarona)
+    res = oferecerCarona.objects.create(dataOfCarona=dataOfCarona, destino=destino, partida=partida,  quantidadeVagas=quantidadeVagas, valorCarona=valorCarona, usuario=usuario2)
 
     res.save()
 
