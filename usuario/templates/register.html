@@ -1,179 +1,83 @@
 {% extends "model-page.html" %}
 
 {% block content %}
-<!--
-<h1 class="text-center">Cadastro RNcaronas</h1>
-<form enctype="multipart/form-data" action="submit" , method="POST"> {%csrf_token %}
-    <div class="container">
-        <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" class="form-control" id="nome">
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-            <label for="password">Senha:</label>
-            <input type="password" class="form-control" id="password">
-        </div>
-        <div class="form-group">
-            <a href="/media/{{ usuario.photo }}" target="_blank">Foto atual</a>
-            <input type="file" class="form-control-file border" name="file" accept="image/*">
-        </div>
-         <button type="submit" class="btn btn-primary">
-             Cadastrar
-
-            </button>
-    </div>
-
-
-</form>
-
-comando para comentar as linhas ctrl + shift + /
+<!--comando para comentar as linhas ctrl + shift + /
 -->
-<div class="row" style="display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-height: 100%;">
-
-    <div role="form">
-        <div class="col-md-12">
-            <div class="card">
-                {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-danger">{{ message }}</div>
-                {% endfor %}
-                {% endif %}
-                <div class="card-header card-header-primary">
-                    <h4 class="card-title">Cadastro de Usuario</h4>
-                    <p class="card-category">Insira seus dados</p>
-                </div>
-                <div class="card-body">
-                    <form enctype="multipart/form-data" action="register/submit" method="POST">
-                        {%csrf_token %}
-                        <div class="row">
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Nome</label>
-                                    <input name="nome" type="text" class="form-control">
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Email </label>
-                                    <input name="email" type="email" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating" for="password">Senha:</label>
-                                    <input name="senha" type="password" class="form-control" id="password">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <div class="card-avatar">
-                                    <a href="/media/{{ usuario.photo }}" target="_blank">Foto atual</a>
-                                    <input type="file" class="form-control-file border" name="file" accept="image/*">
-
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
-                                Cadastrar
-                            </button>
-                            <br></br>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-<!--
 <div class="content">
     <div class="container-fluid">
         <div class="row" style="display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center">
-            <div class="col-md-6">
-                <div class="card">
-                     {% if messages %}
-                      {% for message in messages %}
-                          <div class="alert alert-danger">{{ message }}</div>
-                      {% endfor %}
-                  {% endif %}
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title">Cadastro</h4>
-                        <p class="card-category">Insira seus dados</p>
-                    </div>
-                    <div class="card-body">
-                        <form enctype="multipart/form-data" action="register/submit" , method="POST">
-                            {%csrf_token %}
-                            <div class="row">
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;">
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Nome</label>
-                                        <input name="nome" type="text" class="form-control">
-                                        &lt;!&ndash; o name do input é a variavel que o django vai pegar na requisicao &ndash;&gt;
-                                    </div>
-                                </div>
+           <!-- <div role="form">-->
+                <div class="col-md-6">
+                    <div class="card">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Cadastro de Usuario</h4>
+                            <p class="card-category">Insira seus dados</p>
+                        </div>
+                        <div class="card-body">
+                            <form enctype="multipart/form-data" action="register/submit" method="POST">
+                                {%csrf_token %}
+                                <div class="row">
 
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Email </label>
-                                        <input name="email" type="email" class="form-control">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Nome</label>
+                                            <input name="nome" type="text" class="form-control">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Email </label>
+                                            <input name="email" type="email" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating" for="password">Senha:</label>
-                                        <input name="senha" type="password" class="form-control" id="password">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating" for="password">Senha:</label>
+                                            <input name="senha" type="password" class="form-control" id="password">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                   &lt;!&ndash; so eu tirar esse form grup? não, vc precisa coloca o row onde fica col, mas a div tem que está fora da outra row.certo <div class="card-avatar">&ndash;&gt;
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="card-avatar">
                                             <a href="/media/{{ usuario.photo }}" target="_blank">Foto atual</a>
-                                             <input type="file" class="form-control-file border" name="file" accept="image/*">
-                                    &lt;!&ndash;    </div>
-                                    </div>&ndash;&gt;
+                                            <input type="file" class="form-control-file border" name="file"
+                                                   accept="image/*">
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <br />
-                            <div class="card-footer">
-                                 <button type="submit" class="btn btn-primary">
-                                    Cadastrar
-                                </button>
-                            </div>
-                        </form>
+                                <br/>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">
+                                        Cadastrar
+                                    </button>
+                                    <br></br>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-</div>-->
 {% endblock  %}

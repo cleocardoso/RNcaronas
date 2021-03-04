@@ -87,9 +87,14 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
         <div class="profile-userpic">
+
+
             <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+
         </div>
         <div class="profile-usertitle">
+
+
             <div class="profile-usertitle-name">Usuario</div>
             <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
         </div>
@@ -102,15 +107,14 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a class="nav-link" href="/usurious/register"><em class="fa fa-dashboard">&nbsp;</em>Cadastre-se</a></li>
-        <li><a class="nav-link" href="/usurious/oferecerCarona"><em class="fa fa-calendar">&nbsp;</em>Oferecer Carona</a></li>
+        <li class="active"></li>
+        <li><a class="nav-link" href="/"><em class="fa fa-home">&nbsp;</em>Inicio</a></li>
+        <li><a class="nav-link" href="/usurious/register"><em class="fa fa-user">&nbsp;</em>Cadastre-se</a></li>
+        <li><a class="nav-link" href="/usurious/oferecerCarona"><em class="fa fa-calendar">&nbsp;</em>Oferecer
+            Carona</a></li>
         <li><a href="/logout/"><em class="fa fa-power-off">&nbsp;</em> Sair</a></li>
     </ul>
 </div><!--/.sidebar-->
-<!--</div>&lt;!&ndash;/.col&ndash;&gt;
-
-</div>&lt;!&ndash;/.row&ndash;&gt;
-</div>    &lt;!&ndash;/.main&ndash;&gt;-->
 
 <script src="{% static 'js/jquery-1.11.1.min.js'%}"></script>
 <script src="{% static 'js/bootstrap.min.js'%}"></script>
@@ -120,7 +124,10 @@
 <script src="{% static 'js/easypiechart-data.js'%}"></script>
 <script src="{% static 'js/bootstrap-datepicker.js'%}"></script>
 <script src="{% static 'js/custom.js'%}"></script>
-<script>
+<script src="{% static 'js/request.js'%}"></script>
+<script src="{% static 'js/exemplo.js'%}"></script>
+<script src="{% static 'js/cidadesestados.js'%}"></script>
+<script script type="text/javascript" charset="utf-8">
 		window.onload = function () {
 	var chart1 = document.getElementById("line-chart").getContext("2d");
 	window.myLine = new Chart(chart1).Line(lineChartData, {
@@ -130,6 +137,14 @@
 	scaleFontColor: "#c5c7cc"
 	});
 };
+
+      new dgCidadesEstados({
+          cidade: document.getElementById('destino'),
+          estado: document.getElementById('estado1'),
+          change: true
+        });
+
+
 
 </script>
 

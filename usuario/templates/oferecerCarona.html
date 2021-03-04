@@ -10,11 +10,11 @@ align-items: center">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title">Oferecer Carona</h4>
+                        <h3 class="card-title">Oferecer Carona</h3>
                         <p class="card-category">Ofereça sua carona aqui!</p>
                     </div>
                     <div class="card-body">
-                        <form enctype="multipart/form-data" action="/usurious/oferecerCarona/submit" , method="POST">
+                        <form enctype="multipart/form-data" action="register/submit" method="POST">
                             {%csrf_token %}
                             <div class="row">
 
@@ -22,6 +22,7 @@ align-items: center">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Partida</label>
                                         <input name="partida" type="text" class="form-control">
+
                                         <!-- o name do input é a variavel que o django vai pegar na requisicao -->
                                     </div>
                                 </div>
@@ -38,8 +39,10 @@ align-items: center">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating" for="quantidadeVagas">Quantidade de vagas:</label>
-                                        <input name="quantidadeVagas" type="number" class="form-control" id="quantidadeVagas">
+                                        <label class="bmd-label-floating" for="quantidadeVagas">Quantidade de
+                                            vagas:</label>
+                                        <input name="quantidadeVagas" type="number" class="form-control"
+                                               id="quantidadeVagas">
                                     </div>
                                 </div>
                             </div>
@@ -51,27 +54,27 @@ align-items: center">
                                     </div>
                                 </div>
                             </div>
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating" for="dataOfCarona">Data:</label>
-                                        <input name="dataOfCarona"  type="date" class="form-control" id="dataOfCarona">
+                                        <input name="dataOfCarona" type="date" class="form-control" id="dataOfCarona">
 
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                   <!--  <div class="card-avatar">-->
-                                            <!--  <a href="/media/{{ usuario.photo }}" target="_blank">Foto atual</a>
-                                             <input type="file" class="form-control-file border" name="file" accept="image/*">
-                                      </div>
-                                    </div>-->
+                                    <!--  <div class="card-avatar">-->
+                                    <!--  <a href="/media/{{ usuario.photo }}" target="_blank">Foto atual</a>
+                                     <input type="file" class="form-control-file border" name="file" accept="image/*">
+                              </div>
+                            </div>-->
                                 </div>
                             </div>
 
                             <div class="card-footer">
-                                 <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                     Salvar
                                 </button>
 

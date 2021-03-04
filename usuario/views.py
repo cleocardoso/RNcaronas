@@ -8,17 +8,24 @@ from rest_framework import viewsets
 from rest_framework import serializers
 from rolepermissions.roles import assign_role
 from rest_framework.authtoken.models import Token
-from .models import usuario
+from .models import usuario, pedirCarona
 from .models import oferecerCarona
 
 # Create your views here.
-from .serializers import usuarioSerializer
+from .serializers import usuarioSerializer, oferecerCaronaSerializer, pedirCaronaSerializer
 
 
 class usuarioViewSet(viewsets.ModelViewSet):
     queryset = usuario.objects.all()
     serializer_class = usuarioSerializer
 
+class oferecerCaronaViewSet(viewsets.ModelViewSet):
+    queryset = oferecerCarona.objects.all()
+    serializer_class = oferecerCaronaSerializer
+
+class pedirCaronaViewSet(viewsets.ModelViewSet):
+    queryset = pedirCarona.objects.all()
+    serializer_class = pedirCaronaSerializer
 
 
 
@@ -73,12 +80,13 @@ def set_oferecercarona_usurious(request):
     valorCarona = request.POST.get('valorCarona')
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
-    print("usuario logado = ",usuario2)
-    print(dataOfCarona, destino, partida, quantidadeVagas, valorCarona)
+    #print("usuario logado = ",usuario2)
+    #print(dataOfCarona, destino, partida, quantidadeVagas, valorCarona)
     res = oferecerCarona.objects.create(dataOfCarona=dataOfCarona, destino=destino, partida=partida,  quantidadeVagas=quantidadeVagas, valorCarona=valorCarona, usuario=usuario2)
 
     res.save()
-
+    #return redirect("/usurious/list")
+    #messages.error(request, 'E-mail já cadastrado. Por favor tente outro')
     return redirect('usurious/oferecerCarona')
 
 def list_OferecerCarona(request):#listando os usuarios
@@ -104,6 +112,18 @@ def login_user(request):
 
 def index_usurious(request):
     return render(request, 'index.html')
+
+def set_index_usurious(request):
+    dataPedCarona = request.POST.get('dataPedCarona')
+    destino = request.POST.get('destino')
+    partida = request.POST.get('partida')
+    quantidadeVagas = request.POST.get('quantidadeVagas')
+    usuario3 = request.user
+    usuario4 = usuario.objects.get(email=usuario3.email)
+    result = oferecerCarona.objects.create(dataOfCarona=dataPedCarona, destino=destino, partida=partida,
+                                        quantidadeVagas=quantidadeVagas, usuario=usuario4)
+    result.save()
+    return redirect('usurious/index')
 
 @csrf_protect
 def submit_login(request):

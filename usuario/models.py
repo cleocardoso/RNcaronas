@@ -9,8 +9,6 @@ class usuario(models.Model):
     foto = models.ImageField(upload_to="user", blank=True, null=True)
     active = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    #oferecerCarona = models.OneToOneField("oferecerCarona", on_delete=models.CASCADE, related_name="usuario")
-    #pedirCarona = models.ForeignKey("pedirCarona", on_delete=models.CASCADE, related_name="usuario")
 
     def __str__(self):
 
@@ -25,8 +23,6 @@ class oferecerCarona(models.Model):
     partida = models.CharField(max_length=255, blank=True, null=True)
     quantidadeVagas = models.IntegerField('quantidade de vagas', blank=True, null=True)
     valorCarona = models.DecimalField('valor', max_digits=7, decimal_places=2, blank=True, null=True)
-    #usuario = models.OneToManyField(usuario, on_delete=models.SET_NULL, null=True)
-    #usuario = models.OneToManyField('usuario')
     usuario = models.ForeignKey(usuario, models.CASCADE, related_name='oferecerCarona')
 
 
@@ -39,7 +35,7 @@ class pedirCarona(models.Model):
     destino = models.CharField(max_length=255)
     buscarCarona = models.CharField(max_length=255)
     partida = models.CharField(max_length=255)
-    usuario = models.ForeignKey(usuario, on_delete=models.CASCADE,related_name="pedirCarona")
+    usuario = models.ForeignKey(usuario, models.CASCADE, related_name='pedirCarona')
     class Meta:
         db_table = 'pedirCarona'
 

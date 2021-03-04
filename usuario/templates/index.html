@@ -1,11 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>RNcaronas</title>
-</head>
-<body>
-
 {%extends "model-page.html"%}
-</body>
-</html>
+
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row" style="display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h3 class="card-title" align-text=" center">Encontre sua carona aqui!</h3>
+
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="card-body">
+                        <form role="search" enctype="multipart/form-data" action="" method="post">
+                            <div class="row">
+
+                                <div class="col-md-2 col-xs-4">
+                                    <div class="form-group">
+                                        <label for="partida"><em class="fa fa-map-marker">&nbsp;</em>Local de Saida:</label>
+                                        <input type="text"  id="partida" class="form-control" name="partida"
+                                               placeholder="Saindo ..." required>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-xs-4">
+                                    <div class="form-group">
+                                        <label for="destino"><em class="fa fa-map-marker">&nbsp;</em>Local de Chegada:</label>
+                                        <input type="text" id="destino" class="form-control" name="destino"
+                                               placeholder="Indo para ..." required>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-xs-4">
+                                    <div class="form-group">
+                                        <label for="quantidadeVagas"><em class="fa fa-user">&nbsp;</em> Vagas:</label>
+                                        <input type="number" id="quantidadeVagas" class="form-control"
+                                               name="quantidadeVagas"
+                                               placeholder="pasageiros" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-4">
+                                    <div class="form-group">
+                                        <label for="dataPedCarona"><em class="fa fa-calendar"></em> Data:</label>
+                                        <input type="date" id="dataPedCarona" class="form-control" name="dataPedCarona"
+                                               placeholder="Data" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-4">
+                                    <div class="form-group">
+                                        <br>
+                                        <button type="submit" class="btn btn-primary"><em class="fa fa-search"
+                                                                                          aria-hidden="true"></em> Buscar</em>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
