@@ -45,7 +45,8 @@ urlpatterns = [
     path('usurious/oferecerCarona/', views.oferecercarona_usurious),
     path('usurious/oferecerCarona/submit', views.set_oferecercarona_usurious),
     path('usurious/listOferecercarona', views.list_OferecerCarona),
-    path('usurious/index', views.index_usurious),
+    path('usurious/index', views.index_usurious, name="index"),
+    path('usurious/index/submit', views.set_index_usurious),
     path('', RedirectView.as_view(url='usurious/index'))
 ]
 urlpatterns += staticfiles_urlpatterns()

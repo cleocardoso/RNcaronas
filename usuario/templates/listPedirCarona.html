@@ -1,27 +1,9 @@
-{% extends "model-page.html" %}
-
-{% block style %}
-<style>
-        div.polaroid {
-            width: 250px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            text-align: center;
-        }
-        div.container {
-            padding: 10px;
-        }
-
-
-
-</style>
-{% endblock %}
-
 {% block content %}
 <div class="content">
     <div class="container-fluid">
         <div class="row" style="display: flex;flex-direction: row;justify-content: center;align-items: center">
 
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Lista de Caronas</h4>
@@ -29,8 +11,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-
-                            <table class="table" id="list-oferecer-carona">
+                            <table class="table">
                                 <thead class=" text-primary">
                                 <!--<th>
                                     Foto
@@ -62,7 +43,6 @@
                                     <td>{{ o.destino }}</td>
                                     <td>{{ o.quantidadeVagas }}</td>
                                     <td>{{ o.dataOfCarona}}</td>
-                                    <td>{{ o.valorCarona}}</td>
                                 </tr>
                                 {% endfor %}
                                 </tbody>

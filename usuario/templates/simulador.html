@@ -1,0 +1,11 @@
+{% for usuario in usuarios %}
+        <button class="tablink" onclick="openPage('{{ usuario.destino }}', this, 'red')"><a>{{ usuario.destino }}</a></button>
+
+        <div id="{{ usuario.destino }}" class="tabcontent">
+            {% for app in apps %}
+                {{ app }}
+            {% empty %}
+                <p>Nenhum aparelho encontrado</p>
+            {% endfor %}
+        </div>
+    {% endfor %}

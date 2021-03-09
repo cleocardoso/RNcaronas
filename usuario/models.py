@@ -6,6 +6,7 @@ class usuario(models.Model):
     nome = models.CharField(max_length=255)
     email = models.EmailField()
     senha = models.CharField(max_length=50)
+    nrTelCelular = models.CharField(max_length=11, blank=True, null=True, verbose_name='Nº telefone celular')
     foto = models.ImageField(upload_to="user", blank=True, null=True)
     active = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -33,7 +34,6 @@ class pedirCarona(models.Model):
     dataPedCarona = models.DateField(null=True, blank=True)
     quantidadeVagas = models.IntegerField('quantidade de vagas')
     destino = models.CharField(max_length=255)
-    buscarCarona = models.CharField(max_length=255)
     partida = models.CharField(max_length=255)
     usuario = models.ForeignKey(usuario, models.CASCADE, related_name='pedirCarona')
     class Meta:

@@ -1,3 +1,4 @@
+import bcrypt
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
@@ -40,31 +41,32 @@ def register_usurious(request):
 def oferecercarona_usurious(request):
     return render(request, 'oferecerCarona.html')
 
+
 #@login_required(login_url='/login/')
 def set_usurious(request):
     nome = request.POST.get('nome')
     email = request.POST.get('email')
     senha = request.POST.get('senha')
+    nrTelCelular = request.POST.get('nrTelCelular')
     foto = request.FILES.get('file')
-    #user = request.user
-    print(nome, email, senha)
+    #hashed = bcrypt.hashpw(senha.encode('utf8'), bcrypt.gensalt())
+    #print(nome, email, senha)
 
 
     new_user = User.objects.filter(username=email)
-    # esse new_user vai verificar se existe alguem com esse email, la na tabela auth_user.
-    # Se tiver retorna true e vai retornar a mensagem de erro, caso contrario ele vai salvar
+    # verificar se existe alguem com esse email, la na tabela auth_user.
+    # Se  retorna true  vai retornar a mensagem de erro, caso contrario ele vai salvar
 
     if not new_user:
         user = User(username=email, first_name=nome,
                     last_name="", email=email)
         user.set_password(senha)
         user.save()
-        userT = usuario(email=email, nome=nome, senha=senha, foto=foto, user=user)
-        # usuario.objects.create(email=email, nome=nome, senha=senha, foto=foto, user=user)
-        # usuario.user = user
+        userT = usuario(email=email, nome=nome, senha=senha, foto=foto, user=user, nrTelCelular=nrTelCelular)
+
         userT.save()
         #Token.objects.create(user=user)
-        #assign_role(user, 'usuario') <- se quiser pode tirar
+
         return redirect("/usurious/list")
     messages.error(request, 'E-mail já cadastrado. Por favor tente outro')
 
@@ -85,13 +87,13 @@ def set_oferecercarona_usurious(request):
     res = oferecerCarona.objects.create(dataOfCarona=dataOfCarona, destino=destino, partida=partida,  quantidadeVagas=quantidadeVagas, valorCarona=valorCarona, usuario=usuario2)
 
     res.save()
-    #return redirect("/usurious/list")
-    #messages.error(request, 'E-mail já cadastrado. Por favor tente outro')
-    return redirect('usurious/oferecerCarona')
+    
+    return redirect('/usurious/listOferecercarona')
 
 def list_OferecerCarona(request):#listando os usuarios
     ofcarona = oferecerCarona.objects.filter()
     #print(oferecerCarona.query)
+    print("Passando aqui..")
     return render(request, 'listOferecerCarona.html', {'ofcarona': ofcarona})
 
 @login_required(login_url='/login/')
@@ -111,7 +113,20 @@ def login_user(request):
     return render(request, 'login.html')
 
 def index_usurious(request):
-    return render(request, 'index.html')
+    List = oferecerCarona.objects.all()
+
+    #realizando a busca e filtrando na tabela
+    destino = request.GET.get('destino')
+    partida = request.GET.get('partida')
+    data = request.GET.get('dataPedCarona')
+    if destino and partida:
+        print("DESTINO "+destino, "PARTIDA "+partida)
+        List = List.filter(destino__icontains=destino) & List.filter(
+            partida__icontains=partida) & List.filter(dataOfCarona=data)
+
+    #print(destino)
+    print(List)
+    return render(request, 'index.html', {'List': List})
 
 def set_index_usurious(request):
     dataPedCarona = request.POST.get('dataPedCarona')
@@ -119,10 +134,12 @@ def set_index_usurious(request):
     partida = request.POST.get('partida')
     quantidadeVagas = request.POST.get('quantidadeVagas')
     usuario3 = request.user
-    usuario4 = usuario.objects.get(email=usuario3.email)
-    result = oferecerCarona.objects.create(dataOfCarona=dataPedCarona, destino=destino, partida=partida,
-                                        quantidadeVagas=quantidadeVagas, usuario=usuario4)
+    usuario2 = usuario.objects.get(email=usuario3.email)
+    result = pedirCarona.objects.create(dataPedCarona=dataPedCarona, destino=destino, partida=partida, quantidadeVagas=quantidadeVagas, usuario=usuario2)
+    print(result)
+
     result.save()
+
     return redirect('usurious/index')
 
 @csrf_protect
@@ -130,13 +147,16 @@ def submit_login(request):
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(username)
-        print(password)
+        #print(username)
+        #print(password)
         user = authenticate(username=username, password=password)
-        print(user)
+        #print(user)
+
+
         if user is not None:
             login(request, user)
             return redirect('/')
         else:
             messages.error(request, 'Usuário e senha inválido. Favor tentar novamente')
         return redirect('/login/')
+

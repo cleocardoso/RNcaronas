@@ -13,9 +13,16 @@ function error(){
 //Usando o Jquery
 // evento para pegar as informações do teclado
 var array = []
+var select = null
 
 $(document).ready(function(){
-    array = getArray();
+    if ($("#destino_list").length){ // vai executar se tiver esse id no html
+        const div = document.getElementById('destino_list')
+        array = getArray();
+        select = document.createElement("select");
+        div.appendChild(select)
+        select.setAttribute('class', 'form-control')
+    }
 });
 
 const estados = [
@@ -61,10 +68,12 @@ $("#destino").keyup(function(){
 
     if ($(this).val() !== ''){
         const result =  filter(array, $(this).val());
-        if (Object.keys(result).length > 0){
+
+        if (result.length > 0){
             console.log("Entrou...")
+            criarSelect(select,result)
         } else {
-            console.log('Buscando...')
+            //select.innerText = "Buscando..."
         }
     }
 })
@@ -73,6 +82,7 @@ $("#partida").keyup(function(){
 
     if ($(this).val() !== ''){
         const result =  filter(array, $(this).val());
+
         if (Object.keys(result).length > 0){
             console.log("Entrou...")
         } else {
@@ -81,18 +91,32 @@ $("#partida").keyup(function(){
     }
 })
 
+function criarSelect(select,dados){
+
+
+    for(let i=0;i < dados.length;i++){
+        const option = document.createElement("option")
+        select.appendChild(option)
+        const {cidade, estado, sigla} = dados[i]
+        option.innerText =  cidade + " - " + sigla
+    }
+
+}
+
+
+
 function filter(array, value){
-    let result = {};
+    let result = [];
     array.filter(function(object){
         object.cidade.filter(function(cidade){
-            if (cidade.toUpperCase() === value.toUpperCase()){
+            if (cidade.toUpperCase().substring(0, value.length) === value.toUpperCase()){
                 const obj = {
                     cidade: cidade,
                     estado: object.estado,
                     sigla: object.sigla
                 }
 
-                result = obj;
+                result.push(obj);
             }
         })
     })
