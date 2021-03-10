@@ -1,3 +1,5 @@
+from _curses import flash
+
 import bcrypt
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
@@ -41,6 +43,20 @@ def register_usurious(request):
 def oferecercarona_usurious(request):
     return render(request, 'oferecerCarona.html')
 
+def pedirCarona_usurious(request):
+    return render(request, 'index.html')
+
+def test_carona(request, id):
+    #  metodo que vai confirmar o pedido da carona
+    # enviar as informações da carona
+    carona = oferecerCarona.objects.get(id=id)
+    if carona:
+        carona.quantidadeVagas -= 1
+        carona.save()
+        #print(carona.quantidadeVagas)
+         #messages.error(request, 'E-mail já cadastrado. Por favor tente outro')
+    success_message = "List successfully saved!!!!"
+    return redirect('/usurious/index')
 
 #@login_required(login_url='/login/')
 def set_usurious(request):
@@ -90,6 +106,22 @@ def set_oferecercarona_usurious(request):
     
     return redirect('/usurious/listOferecercarona')
 
+def set_pedirCarona(request):
+    dataPedCarona = request.POST.get('dataPedCarona')
+    destino = request.POST.get('destino')
+    partida = request.POST.get('partida')
+    quantidadeVagas = request.POST.get('quantidadeVagas')
+    usuario3 = request.user
+    usuario2 = usuario.objects.get(email=usuario3.email)
+
+    res = oferecerCarona.objects.create(dataPedCarona=dataPedCarona, destino=destino, partida=partida,
+                                        quantidadeVagas=quantidadeVagas,  usuario=usuario2)
+
+    res.save()
+
+    return redirect('/usurious/listPedirCarona')
+
+
 def list_OferecerCarona(request):#listando os usuarios
     ofcarona = oferecerCarona.objects.filter()
     #print(oferecerCarona.query)
@@ -113,20 +145,26 @@ def login_user(request):
     return render(request, 'login.html')
 
 def index_usurious(request):
-    List = oferecerCarona.objects.all()
+    # query nativa
+    query = "select * from oferecerCarona o where o.quantidadeVagas > 0 and o.destino = %s and " \
+            "o.partida = %s and o.dataOfCarona = %s and o.quantidadeVagas >= %s"
+    List = None
 
     #realizando a busca e filtrando na tabela
     destino = request.GET.get('destino')
     partida = request.GET.get('partida')
     data = request.GET.get('dataPedCarona')
-    if destino and partida:
-        print("DESTINO "+destino, "PARTIDA "+partida)
-        List = List.filter(destino__icontains=destino) & List.filter(
-            partida__icontains=partida) & List.filter(dataOfCarona=data)
+    vagas = request.GET.get('quantidadeVagas')
 
-    #print(destino)
-    print(List)
+    if destino and partida and data and vagas:
+        List = oferecerCarona.objects.raw(query, [destino, partida, data, vagas])
+        #List = oferecerCarona.objects.all()
+        #print("DESTINO "+destino, "PARTIDA "+partida)
+        #List = List.filter(destino__icontains=destino) & List.filter(
+         #   partida__icontains=partida) & List.filter(dataOfCarona=data) & List.filter(quantidadeVagas=vagas)
+
     return render(request, 'index.html', {'List': List})
+
 
 def set_index_usurious(request):
     dataPedCarona = request.POST.get('dataPedCarona')
@@ -136,7 +174,7 @@ def set_index_usurious(request):
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
     result = pedirCarona.objects.create(dataPedCarona=dataPedCarona, destino=destino, partida=partida, quantidadeVagas=quantidadeVagas, usuario=usuario2)
-    print(result)
+
 
     result.save()
 

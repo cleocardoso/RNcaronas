@@ -45,6 +45,9 @@ urlpatterns = [
     path('usurious/oferecerCarona/', views.oferecercarona_usurious),
     path('usurious/oferecerCarona/submit', views.set_oferecercarona_usurious),
     path('usurious/listOferecercarona', views.list_OferecerCarona),
+    path('usurious/pedirCarona/', views.pedirCarona_usurious),
+    path('usurious/test/<str:id>/', views.test_carona, name="test_carona"),
+    path('usurious/listPedirCarona', views.set_pedirCarona),
     path('usurious/index', views.index_usurious, name="index"),
     path('usurious/index/submit', views.set_index_usurious),
     path('', RedirectView.as_view(url='usurious/index'))

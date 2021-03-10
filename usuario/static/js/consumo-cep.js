@@ -13,25 +13,10 @@ function error(){
 //Usando o Jquery
 // evento para pegar as informações do teclado
 var array = []
-var select = null
-
-$(document).ready(function(){
-    if ($("#destino_list").length){ // vai executar se tiver esse id no html
-        const div = document.getElementById('destino_list')
-        array = getArray();
-        select = document.createElement("select");
-        div.appendChild(select)
-        select.setAttribute('class', 'form-control')
-    }
-});
-
-const estados = [
-    ['','Selecione um estado'],['AC','Acre'],['AL','Alagoas'],['AM','Amazonas'],['AP','Amapá'],['BA','Bahia'],
-    ['CE','Ceará'],['DF','Distrito Federal'],['ES','Espírito Santo'],['GO','Goiás'],['MA','Maranhão'],['MG','Minas Gerais'],
-    ['MS','Mato Grosso do Sul'],['MT','Mato Grosso'],['PA','Pará'],['PB','Paraíba'],['PE','Pernambuco'],['PI','Piauí'],
-    ['PR','Paraná'],['RJ','Rio de Janeiro'],['RN','Rio Grande do Norte'],['RO','Rondônia'],['RR','Roraima'],['RS','Rio Grande do Sul'],
-    ['SC','Santa Catarina'],['SP','São Paulo'],['SE','Sergipe'],['TO','Tocantins']
-  ];
+var selectD = null
+var selectP = null
+var criouSelectD = false;
+var criouSelectP = false;
 
 const cidades = [
 	[''],
@@ -63,43 +48,156 @@ const cidades = [
 	['Aracaju','Amparo de São Francisco','Aquidabã','Arauá','Areia Branca','Barra dos Coqueiros','Boquim','Brejo Grande','Campo do Brito','Canhoba','Canindé de São Francisco','Capela','Carira','Carmópolis','Cedro de São João','Cristinápolis','Cumbe','Divina Pastora','Estância','Feira Nova','Frei Paulo','Gararu','General Maynard','Gracho Cardoso','Ilha das Flores','Indiaroba','Itabaiana','Itabaianinha','Itabi','Itaporanga d\'Ajuda','Japaratuba','Japoatã','Lagarto','Laranjeiras','Macambira','Malhada dos Bois','Malhador','Maruim','Moita Bonita','Monte Alegre de Sergipe','Muribeca','Neópolis','Nossa Senhora Aparecida','Nossa Senhora da Glória','Nossa Senhora das Dores','Nossa Senhora de Lourdes','Nossa Senhora do Socorro','Pacatuba','Pedra Mole','Pedrinhas','Pinhão','Pirambu','Poço Redondo','Poço Verde','Porto da Folha','Propriá','Riachão do Dantas','Riachuelo','Ribeirópolis','Rosário do Catete','Salgado','Santa Luzia do Itanhy','Santa Rosa de Lima','Santana do São Francisco','Santo Amaro das Brotas','São Cristóvão','São Domingos','São Francisco','São Miguel do Aleixo','Simão Dias','Siriri','Telha','Tobias Barreto','Tomar do Geru','Umbaúba'],
 	['Palmas','Abreulândia','Aguiarnópolis','Aliança do Tocantins','Almas','Alvorada','Ananás','Angico','Aparecida do Rio Negro','Aragominas','Araguacema','Araguaçu','Araguaína','Araguanã','Araguatins','Arapoema','Arraias','Augustinópolis','Aurora do Tocantins','Axixá do Tocantins','Babaçulândia','Bandeirantes do Tocantins','Barra do Ouro','Barrolândia','Bernardo Sayão','Bom Jesus do Tocantins','Brasilândia do Tocantins','Brejinho de Nazaré','Buriti do Tocantins','Cachoeirinha','Campos Lindos','Cariri do Tocantins','Carmolândia','Carrasco Bonito','Caseara','Centenário','Chapada da Natividade','Chapada de Areia','Colinas do Tocantins','Colméia','Combinado','Conceição do Tocantins','Couto de Magalhães','Cristalândia','Crixás do Tocantins','Darcinópolis','Dianópolis','Divinópolis do Tocantins','Dois Irmãos do Tocantins','Dueré','Esperantina','Fátima','Figueirópolis','Filadélfia','Formoso do Araguaia','Fortaleza do Tabocão','Goianorte','Goiatins','Guaraí','Gurupi','Ipueiras','Itacajá','Itaguatins','Itapiratins','Itaporã do Tocantins','Jaú do Tocantins','Juarina','Lagoa da Confusão','Lagoa do Tocantins','Lajeado','Lavandeira','Lizarda','Luzinópolis','Marianópolis do Tocantins','Mateiros','Maurilândia do Tocantins','Miracema do Tocantins','Miranorte','Monte do Carmo','Monte Santo do Tocantins','Muricilândia','Natividade','Nazaré','Nova Olinda','Nova Rosalândia','Novo Acordo','Novo Alegre','Novo Jardim','Oliveira de Fátima','Palmeirante','Palmeiras do Tocantins','Palmeirópolis','Paraíso do Tocantins','Paranã','Pau d\'Arco','Pedro Afonso','Peixe','Pequizeiro','Pindorama do Tocantins','Piraquê','Pium','Ponte Alta do Bom Jesus','Ponte Alta do Tocantins','Porto Alegre do Tocantins','Porto Nacional','Praia Norte','Presidente Kennedy','Pugmil','Recursolândia','Riachinho','Rio da Conceição','Rio dos Bois','Rio Sono','Sampaio','Sandolândia','Santa Fé do Araguaia','Santa Maria do Tocantins','Santa Rita do Tocantins','Santa Rosa do Tocantins','Santa Tereza do Tocantins','Santa Terezinha Tocantins','São Bento do Tocantins','São Félix do Tocantins','São Miguel do Tocantins','São Salvador do Tocantins','São Sebastião do Tocantins','São Valério da Natividade','Silvanópolis','Sítio Novo do Tocantins','Sucupira','Taguatinga','Taipas do Tocantins','Talismã','Tocantínia','Tocantinópolis','Tupirama','Tupiratins','Wanderlândia','Xambioá']
   ]
+const estados = [
+    ['','Selecione um estado'],['AC','Acre'],['AL','Alagoas'],['AM','Amazonas'],['AP','Amapá'],['BA','Bahia'],
+    ['CE','Ceará'],['DF','Distrito Federal'],['ES','Espírito Santo'],['GO','Goiás'],['MA','Maranhão'],['MG','Minas Gerais'],
+    ['MS','Mato Grosso do Sul'],['MT','Mato Grosso'],['PA','Pará'],['PB','Paraíba'],['PE','Pernambuco'],['PI','Piauí'],
+    ['PR','Paraná'],['RJ','Rio de Janeiro'],['RN','Rio Grande do Norte'],['RO','Rondônia'],['RR','Roraima'],['RS','Rio Grande do Sul'],
+    ['SC','Santa Catarina'],['SP','São Paulo'],['SE','Sergipe'],['TO','Tocantins']
+  ];
+
+
+// funcao anonima que vai ser executada ao navegador carregar a pagina
+$(document).ready(function(){
+    if ($("#destino_list").length){ // vai executar se tiver esse id no html
+        $("#clear-input-destino").hide();
+    }
+
+    if ($("#partida_list")){
+        $("#clear-input-partida").hide();
+    }
+});
+
+
+// funcao anonima que vai ser executada ao input disparar o evento do teclado
 
 $("#destino").keyup(function(){
+    if (!criouSelectD){
+         const div = document.getElementById('destino_list')
+          array = getArray();
+          selectD = document.createElement("select");
+          div.appendChild(selectD)
+          selectD.setAttribute('class', 'form-control')
+          selectD.setAttribute('multiple', true)
+          criouSelectD = true;
+    }
 
     if ($(this).val() !== ''){
         const result =  filter(array, $(this).val());
 
         if (result.length > 0){
-            console.log("Entrou...")
-            criarSelect(select,result)
+            selectD.setAttribute('onclick', 'selectDestino(this)')
+            criarOptions(selectD,result)
         } else {
-            //select.innerText = "Buscando..."
+            selectD.removeAttribute('onclick')
+            criarOptionNotFound(selectD, 'Cidade não encontrada!') // aqui vc pode colocar outra msg caso vc ache melhor
         }
     }
 })
 
 $("#partida").keyup(function(){
 
+     if (!criouSelectP){
+         const div = document.getElementById('partida_list')
+          array = getArray();
+          selectP = document.createElement("select");
+          div.appendChild(selectP)
+          selectP.setAttribute('class', 'form-control')
+          selectP.setAttribute('multiple', true)
+          criouSelectP = true;
+    }
+
     if ($(this).val() !== ''){
         const result =  filter(array, $(this).val());
 
-        if (Object.keys(result).length > 0){
-            console.log("Entrou...")
+        if (result.length > 0){
+            selectP.setAttribute('onclick', 'selectPartida(this)')
+            criarOptions(selectP,result)
         } else {
-            console.log('Buscando...')
+            selectP.removeAttribute('onclick')
+            criarOptionNotFound(selectP, 'Cidade não encontrada!')
         }
     }
 })
 
-function criarSelect(select,dados){
+// funcao para disparar o evento do select
 
+function selectDestino(select){
+    const destino = document.getElementById('destino')
+    const value = select.value;
+    destino.value = value;
+    removeSelectD(document.getElementById('destino_list'))
+    $("#clear-input-destino").show()
+}
+
+//funcao para disparar o evento do select
+
+function selectPartida(select){
+    const partida = document.getElementById('partida')
+    const value = select.value;
+    partida.value = value;
+    removeSelectP(document.getElementById('partida_list'))
+    $("#clear-input-partida").show()
+}
+
+function removeSelectP(div){
+    div.innerHTML = "";
+    criouSelectP = false;
+}
+
+function removeSelectD(div){
+    div.innerHTML = "";
+    criouSelectD = false;
+}
+// limpar o input destino e esconder o botao 'clear'
+
+function clearInputDestino(){
+     const destino = document.getElementById('destino')
+     destino.value = "";
+     criouSelectD = false;
+     $("#clear-input-destino").hide();
+}
+// limpar o input partida e esconder o botao 'clear'
+
+function clearInputPartida(){
+     const partida = document.getElementById('partida')
+     partida.value = "";
+     criouSelectP = false;
+     $("#clear-input-partida").hide();
+}
+
+// remover os filhos do select, ou seja os options
+
+function removeOptions(select){
+    const childs = select.children;
+     if (childs.length > 0){
+        for (let i = 0; i < childs.length; i++){
+            childs.item(i).remove();
+            i--;
+        }
+     }
+}
+
+// criar os options do select
+
+function criarOptions(select,dados){
+    removeOptions(select)
 
     for(let i=0;i < dados.length;i++){
         const option = document.createElement("option")
         select.appendChild(option)
         const {cidade, estado, sigla} = dados[i]
         option.innerText =  cidade + " - " + sigla
+        option.value = cidade;
     }
+
+}
+
+function criarOptionNotFound(select, msg){
+    removeOptions(select)
+        const option = document.createElement("option")
+        select.appendChild(option)
+        option.innerText =msg
 
 }
 
