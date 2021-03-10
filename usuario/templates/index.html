@@ -34,7 +34,8 @@ align-items: center">
                                                 <button type="button" onclick="clearInputPartida()"
                                                         class="btn btn-primary btn-md" id="btn-todo"><font
                                                         style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;"><em class="fa fa-trash"></em></font></font></button>
+                                                        style="vertical-align: inherit;"><em
+                                                        class="fa fa-trash"></em></font></font></button>
                                             </span>
                                     </div>
                                     <div id="partida_list"></div>
@@ -51,22 +52,16 @@ align-items: center">
                                                placeholder="Indo para ..." required>
                                         <span class="input-group-btn" id="clear-input-destino">
                                                 <button type="button" onclick="clearInputDestino()"
-                                                        class="btn btn-primary btn-md" ><font
+                                                        class="btn btn-primary btn-md"><font
                                                         style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;"><em class="fa fa-trash"></em></font></font></button>
+                                                        style="vertical-align: inherit;"><em
+                                                        class="fa fa-trash"></em></font></font></button>
                                             </span>
                                     </div>
                                     <div id="destino_list"></div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-xs-4">
-                                <div class="form-group">
-                                    <label for="quantidadeVagas"><em class="fa fa-user">&nbsp;</em> Vagas:</label>
-                                    <input type="number" id="quantidadeVagas" class="form-control"
-                                           name="quantidadeVagas"
-                                           placeholder="pasageiros" required>
-                                </div>
-                            </div>
+
                             <div class="col-md-2 col-xs-3">
                                 <div class="form-group">
                                     <label for="dataPedCarona"><em class="fa fa-calendar"></em> Data:</label>
@@ -74,7 +69,7 @@ align-items: center">
                                            placeholder="Data" required>
                                 </div>
                             </div>
-                            <div >
+                            <div>
                                 <div class="form-group">
 
                                     <br>
@@ -90,6 +85,16 @@ align-items: center">
 
                     </form>
                     <br>
+                    {% if messages %}
+                        {% for message in messages %}
+                                {% if message.error %}
+                                    <div class="alert alert-danger">{{ message }}</div>
+                                {% endif %}
+                                {% if message.success %}
+                                    <div class="alert alert-success">{{ message }}</div>
+                                {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     {% if List is not None %}
                     <table class="table table-striped">
                         <thead class=" text-primary">
@@ -111,7 +116,9 @@ align-items: center">
                         <th scope="col">
                             Valor
                         </th>
-
+                        <th scope="col">
+                            Vagas
+                        </th>
                         <th scope="col">Detalhe</th>
                         </thead>
                         {% for o in List %}
@@ -123,14 +130,26 @@ align-items: center">
                             <td>{{ o.quantidadeVagas }}</td>
                             <td>{{ o.dataOfCarona}}</td>
                             <td>{{ o.valorCarona}}</td>
-                            <td><a href="{% url 'test_carona' o.id %} ">Pedir Carona</a></td>
+                            <td>
+                                <form action="{% url 'test_carona' o.id %}" method="post">
+                                    {%csrf_token %}
+                                    <div class="form-group">
+                                        <div class="col-md-5 col-xs-3">
+                                            <input name="quantidade" id="quantidade" type="number" class="form-control">
+                                        </div>
+                                        <div class="col-md-5 col-xs-3">
+                                            <button class="btn btn-primary" type="submit">Pedir Carona</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
                         </tr>
                         </tbody>
                         <tfoot>
-                            {% empty %}
-                                <tr>
-                                    <td>Não existe nenhuma carona com esse destino!</td>
-                                </tr>
+                        {% empty %}
+                        <tr>
+                            <td>Não existe nenhuma carona com esse destino!</td>
+                        </tr>
                         </tfoot>
                         {% endfor %}
                     </table>

@@ -1,6 +1,7 @@
 from _curses import flash
 
 import bcrypt
+import pymsgbox
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
@@ -49,14 +50,18 @@ def pedirCarona_usurious(request):
 def test_carona(request, id):
     #  metodo que vai confirmar o pedido da carona
     # enviar as informações da carona
+    quantidade = request.POST.get('quantidade')
     carona = oferecerCarona.objects.get(id=id)
     if carona:
-        carona.quantidadeVagas -= 1
-        carona.save()
-        #print(carona.quantidadeVagas)
-         #messages.error(request, 'E-mail já cadastrado. Por favor tente outro')
-    success_message = "List successfully saved!!!!"
+        carona.quantidadeVagas -= int(quantidade)
+        if carona.quantidadeVagas > 0:
+            carona.save()
+            print(carona.quantidadeVagas)
+            messages.success(request, 'Pedido de carona efetuado com sucesso!')
+        else:
+            messages.error(request, 'Quantidade Insuficiente!')
     return redirect('/usurious/index')
+
 
 #@login_required(login_url='/login/')
 def set_usurious(request):
@@ -147,17 +152,18 @@ def login_user(request):
 def index_usurious(request):
     # query nativa
     query = "select * from oferecerCarona o where o.quantidadeVagas > 0 and o.destino = %s and " \
-            "o.partida = %s and o.dataOfCarona = %s and o.quantidadeVagas >= %s"
+            "o.partida = %s and o.dataOfCarona = %s "
     List = None
 
     #realizando a busca e filtrando na tabela
     destino = request.GET.get('destino')
     partida = request.GET.get('partida')
     data = request.GET.get('dataPedCarona')
-    vagas = request.GET.get('quantidadeVagas')
+    #vagas = request.GET.get('quantidadeVagas')
+    # essa variavel num era para filtrar né?sim
 
-    if destino and partida and data and vagas:
-        List = oferecerCarona.objects.raw(query, [destino, partida, data, vagas])
+    if destino and partida and data :
+        List = oferecerCarona.objects.raw(query, [destino, partida, data])
         #List = oferecerCarona.objects.all()
         #print("DESTINO "+destino, "PARTIDA "+partida)
         #List = List.filter(destino__icontains=destino) & List.filter(
