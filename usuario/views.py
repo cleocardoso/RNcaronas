@@ -52,11 +52,13 @@ def test_carona(request, id):
     # enviar as informações da carona
     quantidade = request.POST.get('quantidade')
     carona = oferecerCarona.objects.get(id=id)
+
     if carona:
         carona.quantidadeVagas -= int(quantidade)
         if carona.quantidadeVagas > 0:
             carona.save()
-            print(carona.quantidadeVagas)
+           # context = {'msg_erro':'Pedido de carona efetuado com sucesso!'}
+            #print(carona.quantidadeVagas)
             messages.success(request, 'Pedido de carona efetuado com sucesso!')
         else:
             messages.error(request, 'Quantidade Insuficiente!')

@@ -87,10 +87,10 @@ align-items: center">
                     <br>
                     {% if messages %}
                         {% for message in messages %}
-                                {% if message.error %}
+                                {% if message.tags == 'error' %}
                                     <div class="alert alert-danger">{{ message }}</div>
                                 {% endif %}
-                                {% if message.success %}
+                                {% if message.tags == 'success' %}
                                     <div class="alert alert-success">{{ message }}</div>
                                 {% endif %}
                         {% endfor %}
