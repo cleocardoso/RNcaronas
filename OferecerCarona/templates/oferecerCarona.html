@@ -1,0 +1,90 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row" style="display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h3 class="card-title">Oferecer Carona</h3>
+                        <p class="card-category">Ofereça sua carona aqui!</p>
+                    </div>
+                    <div class="card-body">
+                        <form enctype="multipart/form-data" action="/ofCaronas/oferecerCarona/submit" method="POST">
+                            {%csrf_token %}
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Partida</label>
+                                        <input name="partida" id="partida"type="text" class="form-control">
+
+                                        <!-- o name do input é a variavel que o django vai pegar na requisicao -->
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Destino </label>
+                                        <input name="destino" id="destino" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" for="quantidadeVagas">Quantidade de
+                                            vagas:</label>
+                                        <input name="quantidadeVagas" type="number" class="form-control"
+                                               id="quantidadeVagas">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" for="valorCarona">Valor:</label>
+                                        <input name="valorCarona" type="number" class="form-control" id="valorCarona">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" for="dataOfCarona">Data:</label>
+                                        <input name="dataOfCarona" type="date" class="form-control" id="dataOfCarona">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!--  <div class="card-avatar">-->
+                                    <!--  <a href="/media/{{ usuario.photo }}" target="_blank">Foto atual</a>
+                                     <input type="file" class="form-control-file border" name="file" accept="image/*">
+                              </div>
+                            </div>-->
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">
+                                    Salvar
+                                </button>
+
+                            </div>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

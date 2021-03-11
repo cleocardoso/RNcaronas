@@ -1,4 +1,5 @@
-{%extends "model-page.html"%}
+{% extends 'model-page.html'%}
+
 
 {% block content %}
 <div class="content">
@@ -121,17 +122,17 @@ align-items: center">
                         </th>
                         <th scope="col">Detalhe</th>
                         </thead>
-                        {% for o in List %}
+                        {% for carona in List %}
                         <tbody>
                         <tr>
                             <!--<td><img src="{{ u.foto.url }}" style="width: 95px"></td>-->
-                            <td>{{ o.partida }}</td>
-                            <td>{{ o.destino }}</td>
-                            <td>{{ o.quantidadeVagas }}</td>
-                            <td>{{ o.dataOfCarona}}</td>
-                            <td>{{ o.valorCarona}}</td>
+                            <td>{{ carona.partida }}</td>
+                            <td>{{ carona.destino }}</td>
+                            <td>{{ carona.oferecerCarona.quantidadeVagas }}</td>
+                            <td>{{ carona.oferecerCarona.dataOfCarona}}</td>
+                            <td>{{ carona.oferecerCarona.valorCarona}}</td>
                             <td>
-                                <form action="{% url 'test_carona' o.id %}" method="post">
+                                <form action="{% url 'test_carona' carona.id %}" method="post">
                                     {%csrf_token %}
                                     <div class="form-group">
                                         <div class="col-md-5 col-xs-3">

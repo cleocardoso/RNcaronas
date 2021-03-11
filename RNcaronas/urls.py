@@ -17,17 +17,24 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from OferecerCarona import urls as oferecerCarona_url
+from usuario import urls as usuario_url
+from PedirCarona import urls as pedirCarona_url
 from usuario import views
+
 from django.views.generic import RedirectView
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
-from usuario.views import usuarioViewSet, oferecerCaronaViewSet, pedirCaronaViewSet
+from usuario.views import usuarioViewSet
+from OferecerCarona.views import oferecerCaronaViewSet
+from PedirCarona.views import pedirCaronaViewSet
+
 from . import settings
 
 router = routers.DefaultRouter()
-router.register(r'usurious', usuarioViewSet)
-router.register(r'ofCaronas', oferecerCaronaViewSet)
-router.register(r'pedCaronas', pedirCaronaViewSet)
+router.register(r'usurious', usuarioViewSet, basename='usuario')
+router.register(r'ofCaronas', oferecerCaronaViewSet, basename='OferecerCarona')
+router.register(r'pedCaronas', pedirCaronaViewSet, basename='PedirCarona')
 
 
 urlpatterns = [
@@ -35,21 +42,15 @@ urlpatterns = [
     path('usuario-auth/', include('rest_framework.urls')),
     url(r'^chaining/', include('smart_selects.urls')),
     path('admin/', admin.site.urls),
-    path('usurious/list', views.list_all_usurious),
-    path('usurious/user', views.list_user_usurious),
     path('login/', views.login_user),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
-    path('usurious/register', views.register_usurious),
-    path('usurious/register/submit', views.set_usurious),
-    path('usurious/oferecerCarona/', views.oferecercarona_usurious),
-    path('usurious/oferecerCarona/submit', views.set_oferecercarona_usurious),
-    path('usurious/listOferecercarona', views.list_OferecerCarona),
-    path('usurious/pedirCarona/', views.pedirCarona_usurious),
-    path('usurious/test/<str:id>/', views.test_carona, name="test_carona"),
-    path('usurious/listPedirCarona', views.set_pedirCarona),
-    path('usurious/index', views.index_usurious, name="index"),
-    path('usurious/index/submit', views.set_index_usurious),
+    path('usurious/', include(usuario_url)),
+    path('ofCaronas/', include(oferecerCarona_url)),
+    path('pedCaronas/', include(pedirCarona_url)),
+    #path('oferecerCarona/submit', oferecerCaronaViewSet.set_oferecercarona),
+    #path('oferecerCarona/listOferecercarona', oferecerCaronaViewSet.list_OferecerCarona),
+
     path('', RedirectView.as_view(url='usurious/index'))
 ]
 urlpatterns += staticfiles_urlpatterns()

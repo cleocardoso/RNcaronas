@@ -1,68 +1,31 @@
-from _curses import flash
-
-import bcrypt
-import pymsgbox
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
 from rest_framework import viewsets
-from rest_framework import serializers
-from rolepermissions.roles import assign_role
-from rest_framework.authtoken.models import Token
-from .models import usuario, pedirCarona
-from .models import oferecerCarona
+from .models import usuario
+from Carona.models import Carona
 
+from PedirCarona.models import pedirCarona
 # Create your views here.
-from .serializers import usuarioSerializer, oferecerCaronaSerializer, pedirCaronaSerializer
+from .serializers import usuarioSerializer
 
 
+# from .models import oferecerCarona
 class usuarioViewSet(viewsets.ModelViewSet):
     queryset = usuario.objects.all()
     serializer_class = usuarioSerializer
-
-class oferecerCaronaViewSet(viewsets.ModelViewSet):
-    queryset = oferecerCarona.objects.all()
-    serializer_class = oferecerCaronaSerializer
-
-class pedirCaronaViewSet(viewsets.ModelViewSet):
-    queryset = pedirCarona.objects.all()
-    serializer_class = pedirCaronaSerializer
-
-
-
-
 
 #@login_required(login_url='/login/')
 ## essa anotação terá acesso a rota se realizar o login
 def register_usurious(request):
     return render(request, 'register.html')
 
-@login_required(login_url='/login/')
-def oferecercarona_usurious(request):
-    return render(request, 'oferecerCarona.html')
 
-def pedirCarona_usurious(request):
-    return render(request, 'index.html')
 
-def test_carona(request, id):
-    #  metodo que vai confirmar o pedido da carona
-    # enviar as informações da carona
-    quantidade = request.POST.get('quantidade')
-    carona = oferecerCarona.objects.get(id=id)
 
-    if carona:
-        carona.quantidadeVagas -= int(quantidade)
-        if carona.quantidadeVagas > 0:
-            carona.save()
-           # context = {'msg_erro':'Pedido de carona efetuado com sucesso!'}
-            #print(carona.quantidadeVagas)
-            messages.success(request, 'Pedido de carona efetuado com sucesso!')
-        else:
-            messages.error(request, 'Quantidade Insuficiente!')
-    return redirect('/usurious/index')
 
 
 #@login_required(login_url='/login/')
@@ -72,8 +35,7 @@ def set_usurious(request):
     senha = request.POST.get('senha')
     nrTelCelular = request.POST.get('nrTelCelular')
     foto = request.FILES.get('file')
-    #hashed = bcrypt.hashpw(senha.encode('utf8'), bcrypt.gensalt())
-    #print(nome, email, senha)
+
 
 
     new_user = User.objects.filter(username=email)
@@ -97,45 +59,6 @@ def set_usurious(request):
     return redirect('/usurious/register')
 
 @login_required(login_url='/login/')
-def set_oferecercarona_usurious(request):
-    dataOfCarona = request.POST.get('dataOfCarona')
-    destino = request.POST.get('destino')
-    partida = request.POST.get('partida')
-    quantidadeVagas = request.POST.get('quantidadeVagas')
-    valorCarona = request.POST.get('valorCarona')
-    usuario3 = request.user
-    usuario2 = usuario.objects.get(email=usuario3.email)
-    #print("usuario logado = ",usuario2)
-    #print(dataOfCarona, destino, partida, quantidadeVagas, valorCarona)
-    res = oferecerCarona.objects.create(dataOfCarona=dataOfCarona, destino=destino, partida=partida,  quantidadeVagas=quantidadeVagas, valorCarona=valorCarona, usuario=usuario2)
-
-    res.save()
-    
-    return redirect('/usurious/listOferecercarona')
-
-def set_pedirCarona(request):
-    dataPedCarona = request.POST.get('dataPedCarona')
-    destino = request.POST.get('destino')
-    partida = request.POST.get('partida')
-    quantidadeVagas = request.POST.get('quantidadeVagas')
-    usuario3 = request.user
-    usuario2 = usuario.objects.get(email=usuario3.email)
-
-    res = oferecerCarona.objects.create(dataPedCarona=dataPedCarona, destino=destino, partida=partida,
-                                        quantidadeVagas=quantidadeVagas,  usuario=usuario2)
-
-    res.save()
-
-    return redirect('/usurious/listPedirCarona')
-
-
-def list_OferecerCarona(request):#listando os usuarios
-    ofcarona = oferecerCarona.objects.filter()
-    #print(oferecerCarona.query)
-    print("Passando aqui..")
-    return render(request, 'listOferecerCarona.html', {'ofcarona': ofcarona})
-
-@login_required(login_url='/login/')
 def list_all_usurious(request):#listando os usuarios
     user = usuario.objects.filter(active=True)
     print(user.query)
@@ -153,24 +76,18 @@ def login_user(request):
 
 def index_usurious(request):
     # query nativa
-    query = "select * from oferecerCarona o where o.quantidadeVagas > 0 and o.destino = %s and " \
-            "o.partida = %s and o.dataOfCarona = %s "
+    query = "select * from Carona c inner join oferecerCarona o on(c.oferecerCarona_id = o.id) " \
+            "where o.quantidadeVagas > 0 and c.destino = %s  and " \
+            "c.partida = %s and o.dataOfCarona = %s "
     List = None
 
     #realizando a busca e filtrando na tabela
     destino = request.GET.get('destino')
     partida = request.GET.get('partida')
     data = request.GET.get('dataPedCarona')
-    #vagas = request.GET.get('quantidadeVagas')
-    # essa variavel num era para filtrar né?sim
 
-    if destino and partida and data :
-        List = oferecerCarona.objects.raw(query, [destino, partida, data])
-        #List = oferecerCarona.objects.all()
-        #print("DESTINO "+destino, "PARTIDA "+partida)
-        #List = List.filter(destino__icontains=destino) & List.filter(
-         #   partida__icontains=partida) & List.filter(dataOfCarona=data) & List.filter(quantidadeVagas=vagas)
-
+    if destino and partida and data:
+        List = Carona.objects.raw(query, [destino, partida, data])
     return render(request, 'index.html', {'List': List})
 
 

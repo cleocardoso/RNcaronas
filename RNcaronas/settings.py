@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'usuario',
+    'tasks',
+    'OferecerCarona',
+    'PedirCarona',
+    'Carona',
 
     'rest_framework',
 
@@ -125,8 +130,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'static/'),
+)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 USE_DJANGO_JQUERY = True
+
+
+#configurações do E-mail
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '5fd32954419b28'
+EMAIL_HOST_PASSWORD = 'f51e547acd0e43'
+EMAIL_PORT = '2525'
