@@ -9,11 +9,14 @@ from PedirCarona.models import pedirCarona
 from usuario.models import usuario
 from Carona.models import Carona
 
+
+
 class pedirCaronaViewSet(viewsets.ModelViewSet):
     queryset = pedirCarona.objects.all()
     serializer_class = pedirCarona
 
 def pedir_Carona(request):
+
     return render(request, 'index.html')
 
 def test_carona(request, id):
@@ -26,7 +29,7 @@ def test_carona(request, id):
     ofCarona = oferecerCarona.objects.get(id=carona.oferecerCarona.id)
     if carona:
         ofCarona.quantidadeVagas -= int(quantidade)
-        if ofCarona.quantidadeVagas > 0:
+        if ofCarona.quantidadeVagas >= 0:
             pedCarona = pedirCarona.objects.create(dataPedCarona=datetime.now(), quantidadeVagas=quantidade, carona=carona
                                                    , Usuario=usuario2)
             pedCarona.save()

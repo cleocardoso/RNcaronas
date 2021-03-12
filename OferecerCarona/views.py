@@ -46,7 +46,30 @@ def list_OferecerCarona(request):  # listando os usuarios
     sql = "SELECT * from Carona c inner join oferecerCarona ofc on(c.oferecerCarona_id = ofc.id) " \
           "inner join usuario u on(u.id = ofc.Usuario_id) where u.id = %s"
     caronas = Carona.objects.raw(sql, [usuario2.id])
-    #caronas = Carona.objects.filter()
-    # print(oferecerCarona.query)
+
     print("Passando aqui..")
     return render(request, 'listOferecerCarona.html', {'caronas': caronas})
+
+
+def set_relatorio_ofCarona(request):
+
+    dataOfCarona = request.POST.get('dataOfCarona')
+    dataPedCarona = request.POST.get('dataPedCarona')
+    usuario3 = request.user
+    usuario2 = usuario.objects.get(email=usuario3.email)
+    sqlOf = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecerCarona_id = ofc.id)" \
+         "inner join usuario u on(u.id = ofc.Usuario_id) " \
+         "where u.id = %s and ofc.dataOfCarona  BETWEEN %s  and %s"
+    sqlPd = "SELECT * from Carona c inner join pedirCarona p on(c.id = p.carona_id)" \
+            " inner join usuario u on(u.id = p.Usuario_id) " \
+            "where u.id = %s and p.dataPedCarona  BETWEEN %s  and %s"
+
+    caronasOf = Carona.objects.raw(sqlOf, [usuario2.id, dataOfCarona, dataPedCarona])
+    caronasPd = Carona.objects.raw(sqlPd, [usuario2.id, dataOfCarona, dataPedCarona])
+    return render(request, 'relatorio.html', {'ListCarona': caronasOf, 'ListPedidos': caronasPd})
+
+@login_required(login_url='/login/')
+def indexRelatorio(request):
+    print("passando ...")
+    return render(request, 'relatorio.html')
+

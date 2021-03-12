@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'usuario',
-    'tasks',
     'OferecerCarona',
+    'mail_templated',
     'PedirCarona',
     'Carona',
-
+    'Email',
+    'notificacoes',
+    'Relatorio',
     'rest_framework',
 
 
@@ -141,7 +143,11 @@ USE_DJANGO_JQUERY = True
 
 
 #configurações do E-mail
-EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '5fd32954419b28'
-EMAIL_HOST_PASSWORD = 'f51e547acd0e43'
-EMAIL_PORT = '2525'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.Rncaronas.smtp.mail.EmailBackend'
+EMAIL_HOST_USER = 'rncaronas@gmail.com' #ese email existe?sim
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USER_TLS = True
+EMAIL_HOST_PASSWORD = 'rncaronas2021'
+

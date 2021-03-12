@@ -10,6 +10,7 @@ urlpatterns = [
     path('user', views.list_user_usurious),
     path('register', views.register_usurious),
     path('register/submit', views.set_usurious),
+    path('recuperarSenha/', views.recuperarSenha),
     path('index', views.index_usurious, name="index"),
     path('index/submit', views.set_index_usurious),
 ]

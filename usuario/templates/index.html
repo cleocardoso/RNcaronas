@@ -120,7 +120,7 @@ align-items: center">
                         <th scope="col">
                             Vagas
                         </th>
-                        <th scope="col">Detalhe</th>
+                        <th scope="col">Ações</th>
                         </thead>
                         {% for carona in List %}
                         <tbody>
@@ -134,14 +134,21 @@ align-items: center">
                             <td>
                                 <form action="{% url 'test_carona' carona.id %}" method="post">
                                     {%csrf_token %}
+
                                     <div class="form-group">
-                                        <div class="col-md-5 col-xs-3">
-                                            <input name="quantidade" id="quantidade" type="number" class="form-control">
+                                        <div class="col-md-4 col-xs-3">
+                                            <input name="quantidade" id="quantidade" type="number" class="form-control" placeholder="Vagas" required>
                                         </div>
-                                        <div class="col-md-5 col-xs-3">
+                                        <div class="col-md-4 col-xs-3">
                                             <button class="btn btn-primary" type="submit">Pedir Carona</button>
                                         </div>
                                     </div>
+                                    <!--<div class="form-group">
+                                        <div class="col-md-5 col-xs-3">
+                                            <button class="btn btn-primary" type="">Detalhes</button>
+                                        </div>
+                                    </div>-->
+
                                 </form>
                             </td>
                         </tr>
@@ -160,4 +167,5 @@ align-items: center">
         </div>
     </div>
 </div>
+
 {% endblock %}

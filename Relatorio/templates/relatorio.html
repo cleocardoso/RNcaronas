@@ -1,0 +1,110 @@
+{% extends 'model-page.html'%}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row" style="display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h3 class="card-title" align-text=" center">Relatório do RN caronas</h3>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-xs-3">
+                            <div class="form-group">
+                                <label for="dataPedCarona"><em class="fa fa-calendar"></em> Data:</label>
+                                <input type="date" id="dataPedCarona" class="form-control" name="dataPedCarona"
+                                       placeholder="Data" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-3">
+                            <div class="form-group">
+                                <label for="dataPedCarona"><em class="fa fa-calendar"></em> Data:</label>
+                                <input type="date" id="dataOfCarona" class="form-control" name="dataOfCarona"
+                                       placeholder="Data" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header card-header-primary">
+                       <h3 class="card-title" align-text=" center">Lista de suas caronas</h3>
+
+                   </div>
+                    <!--<table class="table table-striped">
+                        <thead class=" text-primary">
+                        <th scope="col">
+                            Nome
+                        </th>
+                        <th scope="col">
+                            Destino
+                        </th>
+                        <th scope="col">
+                            Partida
+                        </th>
+                        <th scope="col">
+                           Data
+                        </th>
+                        <th scope="col">
+                            Valor
+                        </th>
+                        </thead>
+
+                        <tbody>
+                        {% for carona in List %}
+                        <tr>
+                            <td>{{ carona.nome }}</td>
+                            <td>{{ carona.partida }}</td>
+                            <td>{{ carona.destino }}</td>
+                            <td>{{ carona.oferecerCarona.dataOfCarona}}</td>
+                            <td>{{ carona.oferecerCarona.valorCarona}}</td>
+                            <td>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                     <div class="card-header card-header-primary">
+                        <h3 class="card-title" align-text=" center">Lista de seus pedidos de caronas</h3>
+
+                    </div>
+                <table class="table table-striped">
+                        <thead class=" text-primary">
+                        <th scope="col">
+                            Nome
+                        </th>
+                        <th scope="col">
+                            Destino
+                        </th>
+                        <th scope="col">
+                            Partida
+                        </th>
+                        <th scope="col">
+                           Data
+                        </th>
+                        </thead>
+
+                        <tbody>
+                        {% for pedidos in List %}
+                        <tr>
+                            <td>{{ pedidos.nome }}</td>
+                            <td>{{ pedidos.partida }}</td>
+                            <td>{{ pedidos.destino }}</td>
+                            <td>{{ carona.pedirCarona.dataPedCarona}}</td>
+
+                            <td>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

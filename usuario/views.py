@@ -11,7 +11,10 @@ from Carona.models import Carona
 from PedirCarona.models import pedirCarona
 # Create your views here.
 from .serializers import usuarioSerializer
-
+#email
+from django.core.mail import send_mail
+from django.conf import settings
+from Email.views import send, sendTemplate
 
 # from .models import oferecerCarona
 class usuarioViewSet(viewsets.ModelViewSet):
@@ -22,11 +25,21 @@ class usuarioViewSet(viewsets.ModelViewSet):
 ## essa anotação terá acesso a rota se realizar o login
 def register_usurious(request):
     return render(request, 'register.html')
+#email
+def email(request):
+    if request.method == 'POST':
+        message = request.POST['message']
+        send('Seu Cadastro foi realizado com sucesso!', message, 'cleotads21@gmail.com')
+        """"send_mail('Seu Cadastro foi realizado com sucesso!',
+                  message,teste aííííííííííí como?
+                  para vc testar se ainda ta dando certo com a mudanca que fiz
+                  so a parte do email como testo?dar mesma forma que vc tava testando
+                  settings.EMAIL_HOST_USER,
+                  ['cleotads21@gmail.com'],#aqui e para pegar o email do usuario. ok
+                  # vc poderia reaproveitar esse metodo para os demais partes do projeto usa-la
+                  fail_silently=False)"""""
 
-
-
-
-
+        return render(request, 'email/email.html')
 
 #@login_required(login_url='/login/')
 def set_usurious(request):
@@ -48,8 +61,10 @@ def set_usurious(request):
         user.set_password(senha)
         user.save()
         userT = usuario(email=email, nome=nome, senha=senha, foto=foto, user=user, nrTelCelular=nrTelCelular)
-
+        print(user.email)
         userT.save()
+        send('Seu Cadastro foi realizado com sucesso!', 'Bem-Vindo ao Carona RN', user.email)
+        # esse email existe?sim
         #Token.objects.create(user=user)
 
         return redirect("/usurious/list")
@@ -88,6 +103,8 @@ def index_usurious(request):
 
     if destino and partida and data:
         List = Carona.objects.raw(query, [destino, partida, data])
+
+    #sendTemplate('Seu Cadastro foi realizado com sucesso!', 'Bem-Vindo ao Carona RN', 'cleotads21@gmail.com')# coloque seu email
     return render(request, 'index.html', {'List': List})
 
 
@@ -123,3 +140,6 @@ def submit_login(request):
             messages.error(request, 'Usuário e senha inválido. Favor tentar novamente')
         return redirect('/login/')
 
+def recuperarSenha(request):
+
+    return render(request, 'index.html')

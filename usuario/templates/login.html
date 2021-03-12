@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RNcaronas</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RNcaronas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
 	body {
 		color: #fff;
 		background: #FFFAFA;
@@ -68,14 +68,20 @@
     .login-form .btn {
         font-size: 16px;
         font-weight: bold;
-		background: #70c5c0;
+		background: #30a5ff;
 		border: none;
 		margin-bottom: 20px;
     }
 	.login-form .btn:hover, .login-form .btn:focus {
-		background: #50b8b3;
+		background: #30a5ff;
         outline: none !important;
 	}
+	.login h1 a {
+    background-image: url('../login/logo.png');
+    background-size: 250px 150px;
+    width: 250px;
+    height: 150px;
+    }
 	.login-form a {
 		color: #fff;
 		text-decoration: underline;
@@ -90,7 +96,8 @@
 	.login-form form a:hover {
 		text-decoration: underline;
 	}
-</style>
+
+    </style>
 </head>
 <body>
 <div class="login-form">
@@ -99,28 +106,28 @@
         <h3 class="text-center">RNcaronas</h3>
         <h2 class="text-center">Login</h2>
         <div class="form-group">
-        	<input type="text" class="form-control" name="username" placeholder="Username" required="required">
+            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
         </div>
-		<div class="form-group">
+        <div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="Password" required="required">
         </div>
         <div class="form-group">
             {% if messages %}
-                      {% for message in messages %}
-                          <div class="alert alert-danger">{{ message }}</div>
-                      {% endfor %}
-                  {% endif %}
+            {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
             <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
         </div>
-		<div class="clearfix">
+        <div class="clearfix">
             <label class="pull-left checkbox-inline"><input type="checkbox"> Lembrar minha senha</label>
-            <a href="#" class="pull-right">Esqueceu sua senha?</a>
+            <a href="/usuriuos/recuperarSenha" class="pull-right">Esqueceu sua senha?</a>
         </div>
-        <div class="clearfix"  >
-            <a  href="/usurious/register" class="pull-right">Cadastre-se</a>
+        <div class="clearfix">
+            <a href="/usurious/register" class="pull-right">Cadastre-se</a>
         </div>
     </form>
-    <p class="text-center small">Não tem conta?  <a href="#">Assine aqui!</a></p>
+    <p class="text-center small">Não tem conta? <a href="#">Assine aqui!</a></p>
 </div>
 </body>
 </html>

@@ -17,7 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+
+from Carona.views import CaronaViewSet
 from OferecerCarona import urls as oferecerCarona_url
+from Relatorio import urls as relatorio_url
 from usuario import urls as usuario_url
 from PedirCarona import urls as pedirCarona_url
 from usuario import views
@@ -35,6 +38,7 @@ router = routers.DefaultRouter()
 router.register(r'usurious', usuarioViewSet, basename='usuario')
 router.register(r'ofCaronas', oferecerCaronaViewSet, basename='OferecerCarona')
 router.register(r'pedCaronas', pedirCaronaViewSet, basename='PedirCarona')
+router.register(r'Caronas', CaronaViewSet, basename='Carona')
 
 
 urlpatterns = [
@@ -48,6 +52,7 @@ urlpatterns = [
     path('usurious/', include(usuario_url)),
     path('ofCaronas/', include(oferecerCarona_url)),
     path('pedCaronas/', include(pedirCarona_url)),
+    path('relatorio/', include(relatorio_url)),
     #path('oferecerCarona/submit', oferecerCaronaViewSet.set_oferecercarona),
     #path('oferecerCarona/listOferecercarona', oferecerCaronaViewSet.list_OferecerCarona),
 

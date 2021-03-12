@@ -1,0 +1,42 @@
+{% block content %}
+<!--comando para comentar as linhas ctrl + shift + /
+-->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row" style="display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Email </label>
+                                            <input name="email" type="email" class="form-control"  required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating" for="password">Senha:</label>
+                                            <input name="senha" type="password" class="form-control" id="password"  required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">
+                                        Salvar
+                                    </button>
+                                    <br></br>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
