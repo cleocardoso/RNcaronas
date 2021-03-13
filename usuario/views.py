@@ -7,8 +7,8 @@ from django.views.decorators.csrf import csrf_protect
 from rest_framework import viewsets
 from .models import usuario
 from Carona.models import Carona
-
 from PedirCarona.models import pedirCarona
+from notificacoes.test import show_notificacoes
 # Create your views here.
 from .serializers import usuarioSerializer
 #email
@@ -26,18 +26,10 @@ class usuarioViewSet(viewsets.ModelViewSet):
 def register_usurious(request):
     return render(request, 'register.html')
 #email
-def email(request):
+def email(request):#nao deu certo
     if request.method == 'POST':
         message = request.POST['message']
         send('Seu Cadastro foi realizado com sucesso!', message, 'cleotads21@gmail.com')
-        """"send_mail('Seu Cadastro foi realizado com sucesso!',
-                  message,teste aííííííííííí como?
-                  para vc testar se ainda ta dando certo com a mudanca que fiz
-                  so a parte do email como testo?dar mesma forma que vc tava testando
-                  settings.EMAIL_HOST_USER,
-                  ['cleotads21@gmail.com'],#aqui e para pegar o email do usuario. ok
-                  # vc poderia reaproveitar esse metodo para os demais partes do projeto usa-la
-                  fail_silently=False)"""""
 
         return render(request, 'email/email.html')
 
@@ -62,7 +54,6 @@ def set_usurious(request):
         print(user.email)
         userT.save()
         #send('Seu Cadastro foi realizado com sucesso!', 'Bem-Vindo ao Carona RN', user.email)
-        # esse email existe?sim
         #Token.objects.create(user=user)
 
         return redirect("/usurious/list")
@@ -100,12 +91,11 @@ def index_usurious(request):
     destino = request.GET.get('destino')
     partida = request.GET.get('partida')
     data = request.GET.get('dataPedCarona')
-
     if destino and partida and data:
         List = Carona.objects.raw(query, [destino, partida, data])
 
     #sendTemplate('Seu Cadastro foi realizado com sucesso!', 'Bem-Vindo ao Carona RN', 'cleotads21@gmail.com')# coloque seu email
-    return render(request, 'index.html', {'List': List})
+    return render(request, 'index.html', {'List': List, 'notificacoes': show_notificacoes(request)})
 
 
 def set_index_usurious(request):

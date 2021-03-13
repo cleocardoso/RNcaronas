@@ -9,6 +9,8 @@ from OferecerCarona.serializers import oferecerCaronaSerializer
 from usuario.models import usuario
 from Carona.models import Carona
 
+from notificacoes.test import show_notificacoes
+
 
 class oferecerCaronaViewSet(viewsets.ModelViewSet):
     queryset = oferecerCarona.objects.all()
@@ -46,10 +48,7 @@ def list_OferecerCarona(request):  # listando os usuarios
     sql = "SELECT * from Carona c inner join oferecerCarona ofc on(c.oferecerCarona_id = ofc.id) " \
           "inner join usuario u on(u.id = ofc.Usuario_id) where u.id = %s"
     caronas = Carona.objects.raw(sql, [usuario2.id])
-
-    print("Passando aqui..")
-    return render(request, 'listOferecerCarona.html', {'caronas': caronas})
-
+    return render(request, 'listOferecerCarona.html', {'caronas': caronas, 'notificacoes': show_notificacoes(request)})
 
 
 

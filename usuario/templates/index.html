@@ -70,31 +70,27 @@ align-items: center">
                                            placeholder="Data" required>
                                 </div>
                             </div>
-                            <div>
-                                <div class="form-group">
-
-                                    <br>
-                                    <div class="input-group-prepend">
-                                        <button type="submit" class="btn btn-primary" id="button-addon1"><em
-                                                class="fa fa-search"
-                                                aria-hidden="true"></em> Buscar</em>
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="form-group" >
+                                <br />
+                                <button type="submit" class="btn btn-primary" id="button-addon1">
+                                            <em
+                                            class="fa fa-search"
+                                            aria-hidden="true"></em> Buscar
+                                    </button>
                             </div>
                         </div>
 
                     </form>
                     <br>
                     {% if messages %}
-                        {% for message in messages %}
-                                {% if message.tags == 'error' %}
-                                    <div class="alert alert-danger">{{ message }}</div>
-                                {% endif %}
-                                {% if message.tags == 'success' %}
-                                    <div class="alert alert-success">{{ message }}</div>
-                                {% endif %}
-                        {% endfor %}
+                    {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                    {% endif %}
+                    {% if message.tags == 'success' %}
+                    <div class="alert alert-success">{{ message }}</div>
+                    {% endif %}
+                    {% endfor %}
                     {% endif %}
                     {% if List is not None %}
                     <table class="table table-striped">
@@ -136,12 +132,13 @@ align-items: center">
                             <td>{{ carona.oferecerCarona.dataOfCarona}}</td>
                             <td>{{ carona.oferecerCarona.valorCarona}}</td>
                             <td>
-                                <form action="{% url 'test_carona' carona.id %}" method="post">
+                                <form action="{% url 'set_pedirCarona' carona.id %}" method="post">
                                     {%csrf_token %}
 
                                     <div class="form-group">
                                         <div class="col-md-4 col-xs-3">
-                                            <input name="quantidade" id="quantidade" type="number" class="form-control" placeholder="Vagas" required>
+                                            <input name="quantidade" id="quantidade" type="number" class="form-control"
+                                                   placeholder="Vagas" required>
                                         </div>
                                         <div class="col-md-4 col-xs-3">
                                             <button class="btn btn-primary" type="submit">Pedir Carona</button>

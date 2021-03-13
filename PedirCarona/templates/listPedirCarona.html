@@ -1,9 +1,11 @@
+{% extends 'model-page.html'%}
+
 {% block content %}
 <div class="content">
     <div class="container-fluid">
         <div class="row" style="display: flex;flex-direction: row;justify-content: center;align-items: center">
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Lista de Caronas</h4>
@@ -18,7 +20,7 @@
                                 </th>
                                 <th>
                                     Motorista
-                                </th>-->
+                                </th>
                                 <th>
                                     Partida
                                 </th>
@@ -36,18 +38,24 @@
                                 </th>
                                 </thead>
                                 <tbody>
-                                {% for o in ofcarona %}
+                                {% for pedido in pedidos %}
                                 <tr>
 
-                                    <td><img src="{{ u.foto.url }}" style="width: 95px"></td>
-                                    <td>{{ o.nome }}</td>
-                                    <td>{{ o.partida }}</td>
-                                    <td>{{ o.destino }}</td>
-                                    <td>{{ o.quantidadeVagas }}</td>
-                                    <td>{{ o.dataOfCarona}}</td>
+                                    <td><img src="{{ pedido.carona.oferecerCarona.Usuario.foto.url }}" style="width: 95px"></td>
+                                    <td>{{ pedido.carona.oferecerCarona.Usuario.nome }}</td>
+                                    <td>{{ pedido.carona.partida }}</td>
+                                    <td>{{ pedido.carona.destino }}</td>
+                                    <td>{{ pedido.quantidadeVagas }}</td>
+                                    <td>{{ pedido.dataPedCarona}}</td>
                                 </tr>
-                                {% endfor %}
                                 </tbody>
+                                <tfoot>
+                                {% empty %}
+                                <tr>
+                                    <td><em class="fa fa-exclamation-circle"></em>Você não registrou nenhum pedido!</td>
+                                </tr>
+                                </tfoot>
+                                {% endfor %}
                             </table>
                         </div>
                     </div>
