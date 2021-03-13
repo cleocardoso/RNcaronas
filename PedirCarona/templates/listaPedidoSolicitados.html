@@ -1,12 +1,15 @@
+{% extends "model-page.html" %}
+
 {% block content %}
 <div class="content">
     <div class="container-fluid">
-        <div class="row" style="display: flex;flex-direction: row;justify-content: center;align-items: center">
+        <div class="row"
+             style="display: flex;flex-direction: row;justify-content: center;align-items: center">
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Lista de Caronas</h4>
+                        <h4 class="card-title ">Caronas Solicitadas</h4>
 
                     </div>
                     <div class="card-body">
@@ -18,7 +21,7 @@
                                 </th>
                                 <th>
                                     Motorista
-                                </th>-->
+                                </th>
                                 <th>
                                     Partida
                                 </th>
@@ -36,15 +39,27 @@
                                 </th>
                                 </thead>
                                 <tbody>
-                                {% for o in ofcarona %}
+                                {% for pedir in ListPedidos %}
                                 <tr>
+                                    <td><img src="{{ pedir.Usuario.foto.url }}" style="width: 95px"></td>
+                                    <td>{{ pedir.Usuario.nome }}</td>
+                                    <td>{{ pedir.carona.partida }}</td>
+                                    <td>{{ pedir.carona.destino }}</td>
+                                    <td>{{ pedir.quantidadeVagas }}</td>
+                                    <td>{{ pedir.dataOfCarona}}</td>
+                                    <td>
+                                        <form
+                                            action="{% url 'aceitar_pedido' pedir.id %}"
+                                        method="post">
+                                        {%csrf_token %}
 
-                                    <td><img src="{{ u.foto.url }}" style="width: 95px"></td>
-                                    <td>{{ o.nome }}</td>
-                                    <td>{{ o.partida }}</td>
-                                    <td>{{ o.destino }}</td>
-                                    <td>{{ o.quantidadeVagas }}</td>
-                                    <td>{{ o.dataOfCarona}}</td>
+                                        <div class="form-group">
+                                            <div class="col-md-4 col-xs-3">
+                                                <button class="btn btn-primary" type="submit">Aceitar</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                                 </tbody>

@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+
 
 from django.core import mail
 from django.conf import settings
@@ -23,3 +26,7 @@ def send(title, message, emails):
                    [emails],
                    fail_silently=False)
     connection.close()
+
+
+
+

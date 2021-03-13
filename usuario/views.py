@@ -49,8 +49,6 @@ def set_usurious(request):
     nrTelCelular = request.POST.get('nrTelCelular')
     foto = request.FILES.get('file')
 
-
-
     new_user = User.objects.filter(username=email)
     # verificar se existe alguem com esse email, la na tabela auth_user.
     # Se  retorna true  vai retornar a mensagem de erro, caso contrario ele vai salvar
@@ -63,7 +61,7 @@ def set_usurious(request):
         userT = usuario(email=email, nome=nome, senha=senha, foto=foto, user=user, nrTelCelular=nrTelCelular)
         print(user.email)
         userT.save()
-        send('Seu Cadastro foi realizado com sucesso!', 'Bem-Vindo ao Carona RN', user.email)
+        #send('Seu Cadastro foi realizado com sucesso!', 'Bem-Vindo ao Carona RN', user.email)
         # esse email existe?sim
         #Token.objects.create(user=user)
 
@@ -97,6 +95,8 @@ def index_usurious(request):
     List = None
 
     #realizando a busca e filtrando na tabela
+    #foto = request.FILES.get('file')
+    #nome = request.GET.get('nome')
     destino = request.GET.get('destino')
     partida = request.GET.get('partida')
     data = request.GET.get('dataPedCarona')
