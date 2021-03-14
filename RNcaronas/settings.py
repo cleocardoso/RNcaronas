@@ -101,7 +101,11 @@ WSGI_APPLICATION = 'RNcaronas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'JAWSDB_URL',
+        'NAME': 'rncaronas',
+        'USER': 'trj4fedwfs2bsmuc',
+        'PASSWORD': 't3n7itb5jyv018ti',
+        'HOST': 'eyw6324oty5fsovx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	',
+        'PORT': '3306',
     }
 }
 
