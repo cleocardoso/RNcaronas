@@ -23,6 +23,7 @@ from OferecerCarona import urls as oferecerCarona_url
 from Relatorio import urls as relatorio_url
 from usuario import urls as usuario_url
 from PedirCarona import urls as pedirCarona_url
+from notificacoes import urls as notificacao_url
 from usuario import views
 
 from django.views.generic import RedirectView
@@ -53,6 +54,7 @@ urlpatterns = [
     path('ofCaronas/', include(oferecerCarona_url)),
     path('pedCaronas/', include(pedirCarona_url)),
     path('relatorio/', include(relatorio_url)),
+    path('notificacao/', include(notificacao_url)),
     #path('oferecerCarona/submit', oferecerCaronaViewSet.set_oferecercarona),
     #path('oferecerCarona/listOferecercarona', oferecerCaronaViewSet.list_OferecerCarona),
 

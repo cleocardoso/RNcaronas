@@ -45,7 +45,7 @@ def set_relatorio_PedCarona(request):
 
     sqlPd = "SELECT * from Carona c inner join pedirCarona ofc on(ofc.carona_id = c.id)  " \
             " inner join usuario u on(u.id = ofc.Usuario_id) " \
-            "where u.id = %s and c.partida = %s and c.destino = %s and  ofc.status = 1"
+            "where u.id = %s and c.partida = %s and c.destino = %s and  ofc.statusConcluido = 1"
 
     sqlOf = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecerCarona_id = ofc.id)" \
             "inner join usuario u on(u.id = ofc.Usuario_id) " \

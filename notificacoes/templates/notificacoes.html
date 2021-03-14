@@ -28,7 +28,7 @@
                 {% include 'mensagens.html'  %}
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Lista de Caronas</h4>
+                        <h4 class="card-title ">Lista de Notificações</h4>
 
                     </div>
                     <div class="card-body">
@@ -40,47 +40,53 @@
                                     Foto
                                 </th>
                                 <th>
+                                    Mensagem
+                                </th>
+                                <th>
+                                    Data
+                                </th>
+                                <th>
+                                    Quantidade no Pedido
+                                </th>
+                                <th>
+                                    Dia do Pedido
+                                </th>
+                                <th>
                                     Partida
                                 </th>
                                 <th>
                                     Destino
                                 </th>
                                 <th>
-                                    Quantidade de vagas
+                                    Valor da Passagem
                                 </th>
                                 <th>
-                                    Dia
-                                </th>
-                                <th>
-                                    Valor da passagem
-                                </th>
-                                <th>
-                                    Valor Total
+                                    Valor do Pedido
                                 </th>
                                 </thead>
                                 <tbody>
-                                {% for carona in caronas %}
+                                {% for notificacao in notificacoes %}
                                 <tr>
 
-                                    <td><img src="{{ carona.oferecerCarona.Usuario.foto.url }}" style="width: 95px">
+                                    <td><img src="{{ notificacao.UsuarioEnvia.foto.url }}" style="width: 95px">
                                     </td>
-                                    <td>{{ carona.partida }}</td>
-                                    <td>{{ carona.destino }}</td>
-                                    <td>{{ carona.oferecerCarona.quantidadeVagas }}</td>
-                                    <td>{{ carona.oferecerCarona.dataOfCarona}}</td>
-                                    <td>{{ carona.oferecerCarona.valorCarona}}</td>
-                                    <td>{{ carona.oferecerCarona.ValorTotal}}</td>
-                                </tr>
+                                    <td>{{ notificacao.mensagem }}</td>
+                                    <td>{{ notificacao.data }}</td>
+                                    <td>{{ notificacao.PedidoSolicidato.quantidadeVagas }}</td>
+                                    <td>{{ notificacao.PedidoSolicidato.dataPedCarona}}</td>
+                                    <td>{{ notificacao.PedidoSolicidato.carona.partida}}</td>
+                                    <td>{{ notificacao.PedidoSolicidato.carona.destino}}</td>
+                                    <td>{{ notificacao.PedidoSolicidato.carona.oferecerCarona.valorCarona}}</td>
+                                    <td>{{ notificacao.PedidoSolicidato.total}}</td>
 
+                                </tr>
                                 </tbody>
                                 {% empty %}
-                                <tfoot>
-                                 {% include 'mensagem-nao-encontrada.html' with mensagem='Não existe nenhuma carona registrada no RNCaronas!'  %}
+                                 <tfoot>
+                                 {% include 'mensagem-nao-encontrada.html' with mensagem='Não existe nenhuma notificação registrada no RNCaronas!!'  %}
                                 </tfoot>
                                 {% endfor %}
                             </table>
-                            <a class="btn btn-primary" href="/ofCaronas/oferecerCarona"><em class="fa fa-car">&nbsp;</em>Oferecer
-                Carona</a>
                         </div>
                     </div>
                 </div>

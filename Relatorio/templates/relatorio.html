@@ -135,7 +135,10 @@
                                 Data
                             </th>
                             <th scope="col">
-                                Valor
+                                Valor da Passagem
+                            </th>
+                            <th scope="col">
+                                Valor Total
                             </th>
                             </thead>
 
@@ -147,6 +150,7 @@
                                 <td>{{ carona.destino }}</td>
                                 <td>{{ carona.oferecerCarona.dataOfCarona}}</td>
                                 <td>{{ carona.oferecerCarona.valorCarona}}</td>
+                                <td>{{ carona.oferecerCarona.ValorTotal}}</td>
                                 <td>
                                 </td>
                             </tr>
@@ -181,22 +185,24 @@
                             Data
                         </th>
                         <th scope="col">
-                            Valor
-                            </th>
+                            Valor da Pedido
+                        </th>
+                        <th scope="col">
+                            Valor da Passagem
+                        </th>
                         </thead>
 
                         <tbody>
                         {% for pedidos in ListPedidos %}
                         <tr>
                             <td>{{ pedidos.nome }}</td>
-                            <td><img src="{{ pedidos.oferecerCarona.Usuario.foto.url }}"  style="width: 95px"></td>
+                            <td><img src="{{ pedidos.oferecerCarona.Usuario.foto.url }}" style="width: 95px"></td>
                             <td>{{ pedidos.partida }}</td>
                             <td>{{ pedidos.destino }}</td>
                             <td>{{ pedidos.dataPedCarona}}</td>
+                            <td>{{ pedidos.total}}</td>
                             <td>{{ pedidos.oferecerCarona.valorCarona}}</td>
-
-                            <td>
-                            </td>
+                            <td></td>
                         </tr>
                         </tbody>
                         {% empty %}
@@ -209,10 +215,13 @@
                     </table>
                     {% if ListPedidos|length > 0 or ListCarona|length > 0 %}
                     <div>
-                        <!--vc colocar o icone do pdf-->
-                        <button onclick="window.print()" type="button" class="btn btn-primary"><em class="fa fa-file-pdf-o" ></em>Gerar PDF</button>
+
+                        <button onclick="window.print()" type="button" class="btn btn-primary"><em
+                                class="fa fa-file-pdf-o"></em>Gerar PDF
+                        </button>
+                        <b/>
                     </div>
-                    <b/>
+
                     {% endif %}
                 </div>
             </div>

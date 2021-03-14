@@ -8,7 +8,7 @@ from rest_framework import viewsets
 from .models import usuario
 from Carona.models import Carona
 from PedirCarona.models import pedirCarona
-from notificacoes.test import show_notificacoes
+from notificacoes.util import show_notificacoes
 # Create your views here.
 from .serializers import usuarioSerializer
 #email
@@ -53,11 +53,12 @@ def set_usurious(request):
         userT = usuario(email=email, nome=nome, senha=senha, foto=foto, user=user, nrTelCelular=nrTelCelular)
         print(user.email)
         userT.save()
-        #send('Seu Cadastro foi realizado com sucesso!', 'Bem-Vindo ao Carona RN', user.email)
+        messages.success(request, 'Cadastro realizado com sucesso!')
         #Token.objects.create(user=user)
 
         return redirect("/usurious/list")
     messages.error(request, 'E-mail já cadastrado. Por favor tente outro')
+
 
     # aqui  retonar o usuario, para ele apenas mudar o email
     return redirect('/usurious/register')
@@ -80,21 +81,21 @@ def login_user(request):
 
 def index_usurious(request):
     # query nativa
-    query = "select * from Carona c inner join oferecerCarona o on(c.oferecerCarona_id = o.id) " \
-            "where o.quantidadeVagas > 0 and c.destino = %s  and " \
-            "c.partida = %s and o.dataOfCarona = %s "
+    query = "select * from Carona c inner join oferecerCarona o on(c.oferecerCarona_id = o.id)" \
+            "inner join usuario u on(u.id= o.Usuario_id)" \
+            "where u.id != %s and o.quantidadeVagas > 0 and c.destino = %s  and c.partida = %s and o.dataOfCarona = %s "
     List = None
 
-    #realizando a busca e filtrando na tabela
-    #foto = request.FILES.get('file')
-    #nome = request.GET.get('nome')
     destino = request.GET.get('destino')
     partida = request.GET.get('partida')
-    data = request.GET.get('dataPedCarona')
-    if destino and partida and data:
-        List = Carona.objects.raw(query, [destino, partida, data])
+    usuario3 = request.user
+    usuario2 = usuario.objects.get(email=usuario3.email)
 
-    #sendTemplate('Seu Cadastro foi realizado com sucesso!', 'Bem-Vindo ao Carona RN', 'cleotads21@gmail.com')# coloque seu email
+    data = request.GET.get('dataPedCarona')
+    if destino and partida and data and usuario2:
+        List = Carona.objects.raw(query, [usuario2.id,destino, partida, data])
+
+
     return render(request, 'index.html', {'List': List, 'notificacoes': show_notificacoes(request)})
 
 

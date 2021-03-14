@@ -11,4 +11,7 @@ urlpatterns = [
     path('pedirCarona/listPedidoSolicitado', views.listPedSolicitado),
     path('pedirCarona/listPedidoSolicitado/submit/<str:id>',
          views.aceitaPedido, name='aceitar_pedido'),
+    path('pedirCarona/listPedidoSolicitado/submitt/<str:id>',
+         views.recusarPedido, name='recusar_pedido'),
+
 ]

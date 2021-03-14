@@ -70,28 +70,19 @@ align-items: center">
                                            placeholder="Data" required>
                                 </div>
                             </div>
-                            <div class="form-group" >
-                                <br />
+                            <div class="form-group">
+                                <br/>
                                 <button type="submit" class="btn btn-primary" id="button-addon1">
-                                            <em
+                                    <em
                                             class="fa fa-search"
                                             aria-hidden="true"></em> Buscar
-                                    </button>
+                                </button>
                             </div>
                         </div>
 
                     </form>
                     <br>
-                    {% if messages %}
-                    {% for message in messages %}
-                    {% if message.tags == 'error' %}
-                    <div class="alert alert-danger">{{ message }}</div>
-                    {% endif %}
-                    {% if message.tags == 'success' %}
-                    <div class="alert alert-success">{{ message }}</div>
-                    {% endif %}
-                    {% endfor %}
-                    {% endif %}
+                    {% include 'mensagens.html' %}
                     {% if List is not None %}
                     <table class="table table-striped">
                         <thead class=" text-primary">
@@ -114,12 +105,14 @@ align-items: center">
                             Dia
                         </th>
                         <th scope="col">
-                            Valor
+                            Valor da Passagem
+                        </th>
+                        <th scope="col">
+                            Valor Total
                         </th>
                         <th scope="col">
                             Vagas
                         </th>
-                        <th scope="col">Ações</th>
                         </thead>
                         {% for carona in List %}
                         <tbody>
@@ -131,6 +124,7 @@ align-items: center">
                             <td>{{ carona.oferecerCarona.quantidadeVagas }}</td>
                             <td>{{ carona.oferecerCarona.dataOfCarona}}</td>
                             <td>{{ carona.oferecerCarona.valorCarona}}</td>
+                            <td>{{ carona.oferecerCarona.ValorTotal}}</td>
                             <td>
                                 <form action="{% url 'set_pedirCarona' carona.id %}" method="post">
                                     {%csrf_token %}
@@ -154,11 +148,10 @@ align-items: center">
                             </td>
                         </tr>
                         </tbody>
-                        <tfoot>
                         {% empty %}
-                        <tr>
-                            <td>Não existe nenhuma carona com esse destino!</td>
-                        </tr>
+                        <tfoot>
+                        {% include 'mensagem-nao-encontrada.html' with mensagem='Não existe nenhuma carona com esse
+                        destino!' %}
                         </tfoot>
                         {% endfor %}
                     </table>

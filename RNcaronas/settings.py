@@ -142,12 +142,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 USE_DJANGO_JQUERY = True
 
 
-#configurações do E-mail
+# Configurações de envio do e-mail
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_BACKEND = 'django.Rncaronas.smtp.mail.EmailBackend'
-EMAIL_HOST_USER = 'rncaronas@gmail.com' #ese email existe?sim
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_USER_TLS = True
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'rncaronas@gmail.com'
 EMAIL_HOST_PASSWORD = 'rncaronas2021'
 

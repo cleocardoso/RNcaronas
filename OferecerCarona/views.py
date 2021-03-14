@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -9,7 +10,7 @@ from OferecerCarona.serializers import oferecerCaronaSerializer
 from usuario.models import usuario
 from Carona.models import Carona
 
-from notificacoes.test import show_notificacoes
+from notificacoes.util import show_notificacoes
 
 
 class oferecerCaronaViewSet(viewsets.ModelViewSet):
@@ -31,12 +32,13 @@ def set_oferecercarona(request):
     valorCarona = request.POST.get('valorCarona')
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
-
+    total = int(valorCarona) * int(quantidadeVagas)
     res = oferecerCarona.objects.create(dataOfCarona=dataOfCarona, quantidadeVagas=quantidadeVagas,
-                                        valorCarona=valorCarona, Usuario=usuario2)
+                                        valorCarona=valorCarona, ValorTotal=total, Usuario=usuario2)
     res.save()
     carona = Carona.objects.create(destino=destino, partida=partida, oferecerCarona=res)
     carona.save()
+    messages.success(request, 'Carona adicionada com sucesso!')
     return redirect('/ofCaronas/oferecerCarona/listOferecercarona')
 
 

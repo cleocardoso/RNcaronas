@@ -17,10 +17,10 @@
           rel="stylesheet">-->
     <link href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css"
           rel="stylesheet">
-    <!--[if lt IE 9]>
+
     <script src="{% static 'js/html5shiv.js' %}"></script>
     <script src="{% static 'js/respond.min.js' %}"></script>
-    <![endif]-->
+
     <link rel="stylesheet" href="{% static 'admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
 </head>
@@ -39,6 +39,7 @@
                     <em class="fa fa-bell"></em><span class="label label-danger">{{notificacoes|length}}</span>
                 </a>
                     <ul class="dropdown-menu dropdown-messages">
+
                         {% for notificacao in notificacoes %}
                         <li>
                             <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
@@ -53,49 +54,66 @@
                         </li>
                         <li class="divider"></li>
                         {% endfor %}
+                        <li>
+                            <a href="/notificacao/" class="btn btn-primary">Ver todas</a>
+                        </li>
+                        <!--vc poderia criar uma pagina para mostrar as notificacoes-->
                     </ul>
                 </li>
             </ul>
         </div>
+
     </div><!-- /.container-fluid -->
 </nav>
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
-        <div class="profile-userpic">
-            <img src="{{ user.foto.url }}" class="img-responsive" alt="">
-        </div>
+
         <div class="profile-usertitle">
-
-
             <div class="profile-usertitle-name">{{ user.get_full_name }}</div>
+            {% if user.get_full_name %}
             <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+            {% endif %}
         </div>
         <div class="clear"></div>
     </div>
     <div class="divider"></div>
-    <!--Se vc quiser pode colocar na sua ordem e nos nomes-->
     <ul class="nav menu">
         <li class="active"></li>
         <li><a class="nav-link" href="/"><em class="fa fa-home">&nbsp;</em>Inicio</a></li>
-        {% if not user %}
+        {% if not user.get_full_name %}
         <li><a class="nav-link" href="/usurious/register"><em class="fa fa-user">&nbsp;</em>Cadastre-se</a></li>
         {% endif %}
 
         {% if user.get_full_name %}
-            <li><a class="nav-link" href="/ofCaronas/oferecerCarona"><em class="fa fa-car">&nbsp;</em>Oferecer
-                Carona</a></li>
-            <li><a class="nav-link" href="/ofCaronas/oferecerCarona/listOferecercarona"><em class="fa fa-list">&nbsp;</em>Minhas
-                Caronas</a></li>
-            <li><a class="nav-link" href="/pedCaronas/pedirCarona/listPedidoSolicitado"><em class=" fa fa-list">&nbsp;</em>Meus Pedidos</a>
-            </li>
-
-            <li><a class="nav-link" href="/relatorio/"><em class="fa fa-folder-o">&nbsp;</em>Relatório</a>
-            </li>
-
-            <li><a href="/logout/"><em class="fa fa-power-off">&nbsp;</em> Sair</a></li>
+        <li><a class="nav-link" href="/ofCaronas/oferecerCarona"><em class="fa fa-car">&nbsp;</em>Oferecer
+            Carona</a></li>
+        <li><a class="nav-link" href="/notificacao/"><em class="fa fa-bell">&nbsp;</em>Notificações</a></li>
+        <li class="parent ">
+            <a data-toggle="collapse" href="#sub-item-1">
+                <em class="fa fa-navicon">&nbsp;</em> Caronas <span data-toggle="collapse" href="#sub-item-1"
+                                                                   class="icon pull-right"><em class="fa fa-plus"></em></span>
+            </a>
+            <ul class="children collapse" id="sub-item-1">
+                <li><a class="" href="/pedCaronas/">
+                   <span class=" fa fa-list">&nbsp;</span> Meus Pedidos
+                </a></li>
+                <li><a class="" href="/ofCaronas/oferecerCarona/listOferecercarona">
+                    <span class="fa fa-list">&nbsp;</span> Minhas
+                    Caronas
+                </a></li>
+                <li><a class="" href="/pedCaronas/pedirCarona/listPedidoSolicitado">
+                    <span class="fa fa-list">&nbsp;</span> Pedidos
+                    Solicitados
+                </a></li>
+                <li><a class="" href="/relatorio/">
+                    <span class="fa fa-folder-o">&nbsp;</span> Relatório
+                </a></li>
+            </ul>
+        </li>
+        <li><a href="/logout/"><em class="fa fa-power-off">&nbsp;</em> Sair</a></li>
         {% endif %}
         {% if not user.get_full_name %}
-        <li><a href="/login/"><em  class="fa fa-sign-in">&nbsp;</em> Login</a></li>
+        <li><a href="/login/"><em class="fa fa-sign-in">&nbsp;</em> Login</a></li>
 
         {% endif %}
     </ul>

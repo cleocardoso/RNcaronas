@@ -6,6 +6,7 @@
         <div class="row" style="display: flex;flex-direction: row;justify-content: center;align-items: center">
 
             <div class="col-md-12">
+                {% include 'mensagens.html'  %}
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Lista de Caronas</h4>
@@ -34,7 +35,10 @@
                                     Dia
                                 </th>
                                 <th>
-                                    Valor
+                                    Valor da passagem
+                                </th>
+                                <th>
+                                    Valor Total
                                 </th>
                                 </thead>
                                 <tbody>
@@ -47,16 +51,19 @@
                                     <td>{{ pedido.carona.destino }}</td>
                                     <td>{{ pedido.quantidadeVagas }}</td>
                                     <td>{{ pedido.dataPedCarona}}</td>
+                                    <td>{{ pedido.carona.oferecerCarona.valorCarona}}</td>
+                                    <td>{{ pedido.carona.oferecerCarona.ValorTotal}}</td>
+
                                 </tr>
                                 </tbody>
                                 <tfoot>
                                 {% empty %}
-                                <tr>
-                                    <td><em class="fa fa-exclamation-circle"></em>Você não registrou nenhum pedido!</td>
-                                </tr>
+                                {% include 'mensagem-nao-encontrada.html' with mensagem='Você não registrou nenhum pedido!'  %}
                                 </tfoot>
                                 {% endfor %}
                             </table>
+                            <a class="btn btn-primary" href="/"><em class="fa fa-car">&nbsp;</em>Pedir
+                            Carona</a>
                         </div>
                     </div>
                 </div>

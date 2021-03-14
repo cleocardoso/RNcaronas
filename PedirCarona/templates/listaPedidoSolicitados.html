@@ -7,6 +7,7 @@
              style="display: flex;flex-direction: row;justify-content: center;align-items: center">
 
             <div class="col-md-12">
+                {% include 'mensagens.html'  %}
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Caronas Solicitadas</h4>
@@ -35,7 +36,13 @@
                                     Dia
                                 </th>
                                 <th>
-                                    Valor
+                                    Valor da Passagem
+                                </th>
+                                <th>
+                                    Valor Total
+                                </th>
+                                <th>
+                                    Ações
                                 </th>
                                 </thead>
                                 <tbody>
@@ -47,27 +54,46 @@
                                     <td>{{ pedir.carona.destino }}</td>
                                     <td>{{ pedir.quantidadeVagas }}</td>
                                     <td>{{ pedir.dataOfCarona}}</td>
+                                    <td>{{ pedir.carona.oferecerCarona.valorCarona}}</td>
+                                    <td>{{ pedir.carona.oferecerCarona.ValorTotal}}</td>
                                     <td>
                                         <form
                                                 action="{% url 'aceitar_pedido' pedir.id %}"
                                                 method="post">
                                             {%csrf_token %}
+                                            <div class="col-md-4 col-xs-3">
+                                                <button class="btn btn-success" style="margin:15px" type="submit">
+                                                    Aceitar
+                                                </button>
+                                            </div>
 
-                                            <div class="form-group">
-                                                <div class="col-md-4 col-xs-3">
-                                                    <button class="btn btn-primary" type="submit">Aceitar</button>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-4 col-xs-3">
-                                                    <button class="btn btn-primary" type="submit">Recusar</button>
-                                                </div>
-                                            </div>
+
                                         </form>
                                     </td>
+
+                                    <td>
+                                        <form action="{% url 'recusar_pedido' pedir.id %}"
+                                              method="post">
+                                            {%csrf_token %}
+                                            <div class="col-md-4 col-xs-3">
+                                                <button class="btn btn-danger" style="margin:15px" type="submit">
+                                                    Recusar
+                                                </button>
+                                            </div>
+
+
+                                        </form>
+
+                                    </td>
                                 </tr>
+                                 </tbody>
+                               {% empty %}
+                                <tfoot>
+                                {% include 'mensagem-nao-encontrada.html' with mensagem='Não existe nenhuma carona solicitada no RNCaronas!'  %}
+
+                                </tfoot>
                                 {% endfor %}
-                                </tbody>
+
                             </table>
                         </div>
                     </div>
