@@ -100,8 +100,8 @@ WSGI_APPLICATION = 'RNcaronas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'HEROKU_POSTGRESQL_CRIMSON_URL',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'JAWSDB_URL',
     }
 }
 
