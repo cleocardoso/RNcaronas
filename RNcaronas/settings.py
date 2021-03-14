@@ -17,7 +17,8 @@ from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+# a cimara conseguiu hospedar?nao
+# vc instalou o postgre no heroku?nao
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -28,7 +29,7 @@ SECRET_KEY = 'lz!_#eyc487pt9^6g3i(5u%xfe&kg)z^1bo%5*6-&lo)3$y!@h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -99,8 +100,8 @@ WSGI_APPLICATION = 'RNcaronas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'HEROKU_POSTGRESQL_CRIMSON_URL',
     }
 }
 
