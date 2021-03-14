@@ -9,6 +9,7 @@ from .models import usuario
 from Carona.models import Carona
 from PedirCarona.models import pedirCarona
 from notificacoes.util import show_notificacoes
+from rest_framework.decorators import action
 # Create your views here.
 from .serializers import usuarioSerializer
 #email
@@ -26,7 +27,7 @@ class usuarioViewSet(viewsets.ModelViewSet):
 def register_usurious(request):
     return render(request, 'register.html')
 #email
-def email(request):#nao deu certo
+def email(request):
     if request.method == 'POST':
         message = request.POST['message']
         send('Seu Cadastro foi realizado com sucesso!', message, 'cleotads21@gmail.com')

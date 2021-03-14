@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+
+import django_heroku
 from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -49,7 +51,8 @@ INSTALLED_APPS = [
     'notificacoes',
     'Relatorio',
     'rest_framework',
-
+    'rest_framework_swagger',
+    #'PedirCarona.apps.PedircaronaConfig',
 
 ]
 
@@ -62,6 +65,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+
+}
+
 
 ROOT_URLCONF = 'RNcaronas.urls'
 
@@ -151,3 +161,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rncaronas@gmail.com'
 EMAIL_HOST_PASSWORD = 'rncaronas2021'
 
+django_heroku.settings(locals())

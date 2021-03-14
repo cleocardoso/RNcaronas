@@ -5,6 +5,7 @@ from rest_framework import viewsets
 
 from OferecerCarona.models import oferecerCarona
 from PedirCarona.models import pedirCarona
+from PedirCarona.serializers import PedCaronaSerializer
 
 from usuario.models import usuario
 from Carona.models import Carona
@@ -13,7 +14,8 @@ from notificacoes.models import notificacao
 
 class pedirCaronaViewSet(viewsets.ModelViewSet):
     queryset = pedirCarona.objects.all()
-    serializer_class = pedirCarona
+    serializer_class = PedCaronaSerializer
+
 
 def pedir_Carona(request):
     sql = "SELECT * from pedirCarona p " \

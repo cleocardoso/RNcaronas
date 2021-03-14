@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from notificacoes.util import show_notificacoes, list_notificacoes
+from rest_framework import viewsets
+
+import notificacoes
+
+from notificacoes.util import list_notificacoes
 
 
 def list(request):

@@ -1,8 +1,10 @@
+from rest_framework import serializers
 from PedirCarona.models import pedirCarona
-from usuario import serializers
+
 
 
 class PedCaronaSerializer(serializers.ModelSerializer):
     class Meta:
         model = pedirCarona
-        fields = ('id', 'dataPedCarona','quantidadeVagas')
+        #fields = ('id', 'dataPedCarona','quantidadeVagas','total','statusConcluido','statusAndamento','statusCancelado')
+        fields = ('__all__')
