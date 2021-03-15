@@ -33,8 +33,8 @@ def set_oferecercarona(request):
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
     total = int(valorCarona) * int(quantidadeVagas)
-    res = oferecerCarona.objects.create(dataOfCarona=dataOfCarona, quantidadeVagas=quantidadeVagas,
-                                        valorCarona=valorCarona, valor_total=total, usuario=usuario2)
+    res = oferecerCarona.objects.create(data_carona=dataOfCarona, quantidade_vagas=quantidadeVagas,
+                                        valor_carona=valorCarona, valor_total=total, usuario=usuario2)
     res.save()
     carona = Carona.objects.create(destino=destino, partida=partida, oferecer_carona=res)
     carona.save()

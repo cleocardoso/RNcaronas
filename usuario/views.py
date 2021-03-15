@@ -84,7 +84,7 @@ def index_usurious(request):
     # query nativa
     query = "select * from carona c inner join oferecer_carona o on(c.oferecer_carona_id = o.id)" \
             "inner join usuario u on(u.id= o.usuario_id)" \
-            "where u.id != %s and o.quantidadeVagas > 0 and c.destino = %s  and c.partida = %s and o.dataOfCarona = %s "
+            "where u.id != %s and o.quantidade_vagas > 0 and c.destino = %s  and c.partida = %s and o.data_carona = %s "
     List = None
 
     destino = request.GET.get('destino')
@@ -107,7 +107,7 @@ def set_index_usurious(request):
     quantidadeVagas = request.POST.get('quantidadeVagas')
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
-    result = pedirCarona.objects.create(dataPedCarona=dataPedCarona, destino=destino, partida=partida, quantidadeVagas=quantidadeVagas, usuario=usuario2)
+    result = pedirCarona.objects.create(data_carona=dataPedCarona, destino=destino, partida=partida, quantidade_vagas=quantidadeVagas, usuario=usuario2)
 
 
     result.save()

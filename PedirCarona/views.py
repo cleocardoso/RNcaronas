@@ -35,11 +35,11 @@ def set_pedirCarona(request, id):
     carona = Carona.objects.get(id=id)
     ofCarona = oferecerCarona.objects.get(id=carona.oferecer_carona.id)
     if carona:
-        ofCarona.quantidadeVagas -= int(quantidade)
-        if ofCarona.quantidadeVagas >= 0:
-            pedCarona = pedirCarona.objects.create(dataPedCarona=datetime.now(), quantidadeVagas=quantidade, carona=carona
+        ofCarona.quantidade_vagas -= int(quantidade)
+        if ofCarona.quantidade_vagas >= 0:
+            pedCarona = pedirCarona.objects.create(data_carona=datetime.now(), quantidade_vagas=quantidade, carona=carona
                                                    , usuario=usuario2)
-            pedCarona.statusAndamento = True
+            pedCarona.status_andamento = True
             pedCarona.save()
             ofCarona.save()
 
@@ -58,12 +58,12 @@ def aceitaPedido(request, id):
     usuario2 = usuario.objects.get(email=usuario3.email)
 
     if pedir:
-        pedir.statusConcluido = True
-        pedir.statusAndamento = False
+        pedir.status_concluido = True
+        pedir.status_andamento = False
         oferecer = pedir.carona.oferecer_carona
-        oferecer.valor_total -= int(oferecer.valorCarona) * int(pedir.quantidadeVagas)
+        oferecer.valor_total -= int(oferecer.valor_carona) * int(pedir.quantidade_vagas)
         oferecer.save()
-        pedir.total = int(oferecer.valorCarona) * int(pedir.quantidadeVagas)
+        pedir.total = int(oferecer.valor_carona) * int(pedir.quantidade_vagas)
         print(pedir.total)
         pedir.save()
         set_notificacao(datetime.now(), "Pedido Aceito", usuario2, pedir.usuario, pedir)
@@ -76,8 +76,8 @@ def recusarPedido(request, id):
     usuario2 = usuario.objects.get(email=usuario3.email)
 
     if pedir:
-        pedir.statusCancelado = True
-        pedir.statusAndamento = False
+        pedir.status_cancelado = True
+        pedir.status_andamento = False
         pedir.save()
         set_notificacao(datetime.now(), "Pedido Recusado!", usuario2, pedir.usuario, pedir)
         #messages.success(request, 'Pedido aceito com sucesso!')
@@ -91,7 +91,7 @@ def listPedSolicitado(request):
             "inner join carona c on(ofc.carona_id = c.id) " \
             "inner join oferecer_carona cf on(cf.id = c.oferecer_carona_id) " \
             "inner join usuario u on(u.id = cf.usuario_id) " \
-            "where u.id = %s  and  ofc.statusAndamento = 1 and ofc.statusCancelado = 0 "
+            "where u.id = %s  and  ofc.status_andamento = 1 and ofc.status_cancelado = 0 "
 
     caronasPd = pedirCarona.objects.raw(sqlPd, [usuario2.id])
 
