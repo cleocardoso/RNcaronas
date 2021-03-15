@@ -10,4 +10,4 @@ class oferecerCarona(models.Model):
 
 
     class Meta:
-        db_table = 'oferecerCarona'
+        db_table = 'oferecer_carona'

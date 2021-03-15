@@ -14,4 +14,4 @@ class pedirCarona(models.Model):
 
 
     class Meta:
-        db_table = 'pedirCarona'
+        db_table = 'pedir_carona'

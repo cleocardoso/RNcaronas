@@ -18,7 +18,7 @@ class pedirCaronaViewSet(viewsets.ModelViewSet):
 
 
 def pedir_Carona(request):
-    sql = "SELECT * from pedirCarona p " \
+    sql = "SELECT * from pedir_carona p " \
           "inner join usuario u on(u.id = p.usuario_id) " \
           "where u.id = %s"
     usuario3 = request.user
@@ -87,9 +87,9 @@ def listPedSolicitado(request):
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
 
-    sqlPd = "SELECT * from pedirCarona ofc " \
-            "inner join Carona c on(ofc.carona_id = c.id) " \
-            "inner join oferecerCarona cf on(cf.id = c.oferecer_carona_id) " \
+    sqlPd = "SELECT * from pedir_carona ofc " \
+            "inner join carona c on(ofc.carona_id = c.id) " \
+            "inner join oferecer_carona cf on(cf.id = c.oferecer_carona_id) " \
             "inner join usuario u on(u.id = cf.usuario_id) " \
             "where u.id = %s  and  ofc.statusAndamento = 1 and ofc.statusCancelado = 0 "
 

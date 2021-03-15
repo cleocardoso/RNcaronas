@@ -8,4 +8,4 @@ class Carona(models.Model):
     oferecerCarona = models.ForeignKey(oferecerCarona, name='oferecer_carona', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
-        db_table = 'Carona'
+        db_table = 'carona'
