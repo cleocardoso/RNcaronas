@@ -1,1 +1,1 @@
-web: gunicorn RNcaronas.wsgi --log-file-
+web: gunicorn RNcaronas.wsgi
