@@ -33,19 +33,19 @@ def set_pedirCarona(request, id):
     usuario2 = usuario.objects.get(email=usuario3.email)
     quantidade = request.POST.get('quantidade')
     carona = Carona.objects.get(id=id)
-    ofCarona = oferecerCarona.objects.get(id=carona.oferecerCarona.id)
+    ofCarona = oferecerCarona.objects.get(id=carona.oferecer_carona.id)
     if carona:
         ofCarona.quantidadeVagas -= int(quantidade)
         if ofCarona.quantidadeVagas >= 0:
             pedCarona = pedirCarona.objects.create(dataPedCarona=datetime.now(), quantidadeVagas=quantidade, carona=carona
-                                                   , Usuario=usuario2)
+                                                   , usuario=usuario2)
             pedCarona.statusAndamento = True
             pedCarona.save()
             ofCarona.save()
 
             # usuario envia o pedido: pedCarona.Usuario
             # usuario recebe a notificacao: carona.oferecerCarona.Usuario
-            set_notificacao(datetime.now(), "Pedido Solicitado", pedCarona.usuario, carona.oferecerCarona.usuario, pedCarona)
+            set_notificacao(datetime.now(), "Pedido Solicitado", pedCarona.usuario, carona.oferecer_carona.usuario, pedCarona)
             messages.success(request, 'Pedido de carona efetuado com sucesso!')
         else:
             messages.error(request, 'Quantidade Insuficiente!')
@@ -60,10 +60,11 @@ def aceitaPedido(request, id):
     if pedir:
         pedir.statusConcluido = True
         pedir.statusAndamento = False
-        oferecerCarona=pedir.carona.oferecerCarona
-        oferecerCarona.ValorTotal -= int(oferecerCarona.valorCarona) * int(pedir.quantidadeVagas)
-        oferecerCarona.save()
-        pedir.total = int(oferecerCarona.valorCarona) * int(pedir.quantidadeVagas)
+        oferecer = pedir.carona.oferecer_carona
+        oferecer.valor_total -= int(oferecer.valorCarona) * int(pedir.quantidadeVagas)
+        oferecer.save()
+        pedir.total = int(oferecer.valorCarona) * int(pedir.quantidadeVagas)
+        print(pedir.total)
         pedir.save()
         set_notificacao(datetime.now(), "Pedido Aceito", usuario2, pedir.usuario, pedir)
         messages.success(request, 'Pedido aceito com sucesso!')
@@ -99,6 +100,6 @@ def listPedSolicitado(request):
 
 
 def set_notificacao(data, mgs, usuario_envia, usuario_recebe, pedido):
-    notificacao.objects.create(data=data, mensagem=mgs, UsuarioEnvia=usuario_envia,
-                               UsuarioRecebe=usuario_recebe, PedidoSolicidato=pedido)
+    notificacao.objects.create(data=data, mensagem=mgs, usuario_envia=usuario_envia,
+                               usuario_recebe=usuario_recebe, pedido_solicitado=pedido)
     return

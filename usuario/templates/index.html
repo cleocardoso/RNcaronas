@@ -70,13 +70,25 @@ align-items: center">
                                            placeholder="Data" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <br/>
-                                <button type="submit" class="btn btn-primary" id="button-addon1">
-                                    <em
-                                            class="fa fa-search"
-                                            aria-hidden="true"></em> Buscar
-                                </button>
+                            <div class="col-md-2 col-xs-3">
+                                <div class="form-group">
+                                    <!--<br/>-->
+                                    <!--<button type="submit" class="btn btn-primary" id="button-addon1">
+                                           <em
+                                                   class="fa fa-search"
+                                                   aria-hidden="true"></em> Buscar
+                                    </button>-->
+                                    <!--<div class="form-group">-->
+                                    <label for="dataPedCarona"></label>
+                                    <div style="padding: 7px; height: auto;">
+                                        <button type="submit" value="Buscar" class="btn btn-primary">
+                                            <em
+                                                       class="fa fa-search"
+                                                       aria-hidden="true"></em> Buscar
+                                        </button>
+                                    </div>
+                                    <!--</div>-->
+                                </div>
                             </div>
                         </div>
 
@@ -117,14 +129,14 @@ align-items: center">
                         {% for carona in List %}
                         <tbody>
                         <tr>
-                            <td><img src="{{ carona.oferecerCarona.Usuario.foto.url }}" style="width: 95px"></td>
-                            <td>{{ carona.oferecerCarona.Usuario.nome }}</td>
+                            <td><img src="{{ carona.oferecer_carona.usuario.foto.url }}" style="width: 95px"></td>
+                            <td>{{ carona.oferecer_carona.usuario.nome }}</td>
                             <td>{{ carona.partida }}</td>
                             <td>{{ carona.destino }}</td>
-                            <td>{{ carona.oferecerCarona.quantidadeVagas }}</td>
-                            <td>{{ carona.oferecerCarona.dataOfCarona}}</td>
-                            <td>{{ carona.oferecerCarona.valorCarona}}</td>
-                            <td>{{ carona.oferecerCarona.ValorTotal}}</td>
+                            <td>{{ carona.oferecer_carona.quantidadeVagas }}</td>
+                            <td>{{ carona.oferecer_carona.dataOfCarona}}</td>
+                            <td>{{ carona.oferecer_carona.valorCarona}}</td>
+                            <td>{{ carona.oferecer_carona.valor_total}}</td>
                             <td>
                                 <form action="{% url 'set_pedirCarona' carona.id %}" method="post">
                                     {%csrf_token %}
@@ -150,7 +162,8 @@ align-items: center">
                         </tbody>
                         {% empty %}
                         <tfoot>
-                        {% include 'mensagem-nao-encontrada.html' with mensagem='Não existe nenhuma carona com esse destino!' %}
+                        {% include 'mensagem-nao-encontrada.html' with mensagem='Não existe nenhuma carona com esse
+                        destino!' %}
                         </tfoot>
                         {% endfor %}
                     </table>

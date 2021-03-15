@@ -48,14 +48,14 @@
                                 <tbody>
                                 {% for pedir in ListPedidos %}
                                 <tr>
-                                    <td><img src="{{ pedir.Usuario.foto.url }}" style="width: 95px"></td>
-                                    <td>{{ pedir.Usuario.nome }}</td>
+                                    <td><img src="{{ pedir.usuario.foto.url }}" style="width: 95px"></td>
+                                    <td>{{ pedir.usuario.nome }}</td>
                                     <td>{{ pedir.carona.partida }}</td>
                                     <td>{{ pedir.carona.destino }}</td>
                                     <td>{{ pedir.quantidadeVagas }}</td>
                                     <td>{{ pedir.dataOfCarona}}</td>
-                                    <td>{{ pedir.carona.oferecerCarona.valorCarona}}</td>
-                                    <td>{{ pedir.carona.oferecerCarona.ValorTotal}}</td>
+                                    <td>{{ pedir.carona.oferecer_carona.valorCarona}}</td>
+                                    <td>{{ pedir.carona.oferecer_carona.valor_total}}</td>
                                     <td>
                                         <form
                                                 action="{% url 'aceitar_pedido' pedir.id %}"

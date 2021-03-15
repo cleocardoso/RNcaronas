@@ -68,16 +68,16 @@
                                 {% for notificacao in notificacoes %}
                                 <tr>
 
-                                    <td><img src="{{ notificacao.UsuarioEnvia.foto.url }}" style="width: 95px">
+                                    <td><img src="{{ notificacao.usuario_envia.foto.url }}" style="width: 95px">
                                     </td>
                                     <td>{{ notificacao.mensagem }}</td>
                                     <td>{{ notificacao.data }}</td>
-                                    <td>{{ notificacao.PedidoSolicidato.quantidadeVagas }}</td>
-                                    <td>{{ notificacao.PedidoSolicidato.dataPedCarona}}</td>
-                                    <td>{{ notificacao.PedidoSolicidato.carona.partida}}</td>
-                                    <td>{{ notificacao.PedidoSolicidato.carona.destino}}</td>
-                                    <td>{{ notificacao.PedidoSolicidato.carona.oferecerCarona.valorCarona}}</td>
-                                    <td>{{ notificacao.PedidoSolicidato.total}}</td>
+                                    <td>{{ notificacao.pedido_solicitado.quantidadeVagas }}</td>
+                                    <td>{{ notificacao.pedido_solicitado.dataPedCarona}}</td>
+                                    <td>{{ notificacao.pedido_solicitado.carona.partida}}</td>
+                                    <td>{{ notificacao.pedido_solicitado.carona.destino}}</td>
+                                    <td>{{ notificacao.pedido_solicitado.carona.oferecer_carona.valorCarona}}</td>
+                                    <td>{{ notificacao.pedido_solicitado.total}}</td>
 
                                 </tr>
                                 </tbody>

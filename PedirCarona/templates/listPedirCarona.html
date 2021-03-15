@@ -45,14 +45,14 @@
                                 {% for pedido in pedidos %}
                                 <tr>
 
-                                    <td><img src="{{ pedido.carona.oferecerCarona.Usuario.foto.url }}" style="width: 95px"></td>
+                                    <td><img src="{{ pedido.carona.oferecer_carona.usuario.foto.url }}" style="width: 95px"></td>
                                     <td>{{ pedido.carona.oferecerCarona.Usuario.nome }}</td>
                                     <td>{{ pedido.carona.partida }}</td>
                                     <td>{{ pedido.carona.destino }}</td>
                                     <td>{{ pedido.quantidadeVagas }}</td>
                                     <td>{{ pedido.dataPedCarona}}</td>
-                                    <td>{{ pedido.carona.oferecerCarona.valorCarona}}</td>
-                                    <td>{{ pedido.carona.oferecerCarona.ValorTotal}}</td>
+                                    <td>{{ pedido.carona.oferecer_carona.valorCarona}}</td>
+                                    <td>{{ pedido.total}}</td>
 
                                 </tr>
                                 </tbody>
@@ -62,8 +62,10 @@
                                 </tfoot>
                                 {% endfor %}
                             </table>
-                            <a class="btn btn-primary" href="/"><em class="fa fa-car">&nbsp;</em>Pedir
+                            <div style="margin-bottom: 7.5px">
+                                <a class="btn btn-primary" href="/"><em class="fa fa-car">&nbsp;</em>Pedir
                             Carona</a>
+                            </div>
                         </div>
                     </div>
                 </div>

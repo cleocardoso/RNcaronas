@@ -115,12 +115,11 @@
                             </div>
                         </div>
                     </form>
-                    <div class="row">
+                    <div class="row col-md-12">
                         <div class="card-header card-header-primary">
                             <h3 class="card-title" align-text=" center">Minhas caronas</h3>
-
                         </div>
-                        <table class="table ">
+                        <table class="table table-striped">
                             <thead class=" text-primary">
                             <th scope="col">
                                 Nome
@@ -145,84 +144,81 @@
                             <tbody>
                             {% for carona in ListCarona %}
                             <tr>
-                                <td>{{ carona.nome }}</td>
+                                <td>{{ carona.oferecer_carona.usuario.nome }}</td>
                                 <td>{{ carona.partida }}</td>
                                 <td>{{ carona.destino }}</td>
-                                <td>{{ carona.oferecerCarona.dataOfCarona}}</td>
-                                <td>{{ carona.oferecerCarona.valorCarona}}</td>
-                                <td>{{ carona.oferecerCarona.ValorTotal}}</td>
+                                <td>{{ carona.oferecer_carona.dataOfCarona}}</td>
+                                <td>{{ carona.oferecer_carona.valorCarona}}</td>
+                                <td>{{ carona.oferecer_carona.valor_total}}</td>
                                 <td>
                                 </td>
                             </tr>
                             </tbody>
                             {% empty %}
                             <tfoot>
-                            <tr>
-                                <td>Não foi efetuada nenhuma carona!</td>
-                            </tr>
+                            {% include 'mensagem-nao-encontrada.html' with mensagem='Não foi efetuada nenhuma carona!'
+                            %}
                             </tfoot>
                             {% endfor %}
                         </table>
                     </div>
-                    <div class="card-header card-header-primary">
-                        <h3 class="card-title" align-text="center">Meus pedidos de caronas</h3>
+                    <div class="row col-md-12">
+                        <div class="card-header card-header-primary">
+                            <h3 class="card-title" align-text="center">Meus pedidos de caronas</h3>
+                        </div>
+                        <table class="table table-striped">
+                            <thead class=" text-primary">
+                            <th scope="col">
+                                Nome
+                            </th>
+                            <th scope="col">
+                                Foto
+                            </th>
+                            <th scope="col">
+                                Destino
+                            </th>
+                            <th scope="col">
+                                Partida
+                            </th>
+                            <th scope="col">
+                                Data
+                            </th>
+                            <th scope="col">
+                                Valor da Passagem
+                            </th>
+                            <th scope="col">
+                                Valor do Pedido
+                            </th>
+                            </thead>
+
+                            <tbody>
+                            {% for pedidos in ListPedidos %}
+                            <tr>
+                                <td>{{ pedidos.oferecer_carona.usuario.nome }}</td>
+                                <td><img src="{{ pedidos.oferecer_carona.usuario.foto.url }}" style="width: 95px"></td>
+                                <td>{{ pedidos.partida }}</td>
+                                <td>{{ pedidos.destino }}</td>
+                                <td>{{ pedidos.dataPedCarona}}</td>
+                                <td>{{ pedidos.oferecer_carona.valorCarona}}</td>
+                                <td>{{ pedidos.total}}</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                            {% empty %}
+                            <tfoot>
+                            {% include 'mensagem-nao-encontrada.html' with mensagem='Não foi efetuado nenhum pedido!' %}
+                            </tfoot>
+                            {% endfor %}
+                        </table>
+                        {% if ListPedidos|length > 0 or ListCarona|length > 0 %}
+                        <div style="margin-bottom: 7.5px">
+                            <button onclick="window.print()" type="button" class="btn btn-primary"><em
+                                    class="fa fa-file-pdf-o"></em> Gerar PDF
+                            </button>
+                        </div>
+
+                        {% endif %}
                     </div>
-                    <table class="table table-striped">
-                        <thead class=" text-primary">
-                        <th scope="col">
-                            Nome
-                        </th>
-                        <th scope="col">
-                            Foto
-                        </th>
-                        <th scope="col">
-                            Destino
-                        </th>
-                        <th scope="col">
-                            Partida
-                        </th>
-                        <th scope="col">
-                            Data
-                        </th>
-                        <th scope="col">
-                            Valor da Pedido
-                        </th>
-                        <th scope="col">
-                            Valor da Passagem
-                        </th>
-                        </thead>
-
-                        <tbody>
-                        {% for pedidos in ListPedidos %}
-                        <tr>
-                            <td>{{ pedidos.nome }}</td>
-                            <td><img src="{{ pedidos.oferecerCarona.Usuario.foto.url }}" style="width: 95px"></td>
-                            <td>{{ pedidos.partida }}</td>
-                            <td>{{ pedidos.destino }}</td>
-                            <td>{{ pedidos.dataPedCarona}}</td>
-                            <td>{{ pedidos.total}}</td>
-                            <td>{{ pedidos.oferecerCarona.valorCarona}}</td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                        {% empty %}
-                        <tfoot>
-                        <tr>
-                            <td>Não foi efetuado nenhum pedido!</td>
-                        </tr>
-                        </tfoot>
-                        {% endfor %}
-                    </table>
-                    {% if ListPedidos|length > 0 or ListCarona|length > 0 %}
-                    <div>
-
-                        <button onclick="window.print()" type="button" class="btn btn-primary"><em
-                                class="fa fa-file-pdf-o"></em>Gerar PDF
-                        </button>
-                        <b/>
-                    </div>
-
-                    {% endif %}
                 </div>
             </div>
         </div>

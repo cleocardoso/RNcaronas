@@ -9,7 +9,7 @@ def list_CarnonasData(request):
     dataPedCarona = request.POST.get('dataPedCarona')
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
-    sql = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecerCarona_id = ofc.id)" \
+    sql = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecer_carona_id = ofc.id)" \
           "inner join usuario u on(u.id = ofc.usuario_id) " \
           "where u.id = %s and ofc.dataOfCarona  BETWEEN %s  and %s"
 
@@ -23,7 +23,7 @@ def set_relatorio_ofCarona(request):
     dataPedCarona = request.POST.get('dataPedCarona')
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
-    sqlOf = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecerCarona_id = ofc.id)" \
+    sqlOf = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecer_carona_id = ofc.id)" \
             "inner join usuario u on(u.id = ofc.usuario_id) " \
             "where u.id = %s and ofc.dataOfCarona  BETWEEN %s  and %s"
 
@@ -47,7 +47,7 @@ def set_relatorio_PedCarona(request):
             " inner join usuario u on(u.id = ofc.usuario_id) " \
             "where u.id = %s and c.partida = %s and c.destino = %s and  ofc.statusConcluido = 1"
 
-    sqlOf = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecerCarona_id = ofc.id)" \
+    sqlOf = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecer_carona_id = ofc.id)" \
             "inner join usuario u on(u.id = ofc.usuario_id) " \
             "where u.id = %s and c.destino = %s and c.partida = %s"
 
