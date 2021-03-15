@@ -91,7 +91,7 @@ def index_usurious(request):
     partida = request.GET.get('partida')
     usuario3 = request.user
 
-    if usuario3.email:
+    if usuario3:
         usuario2 = usuario.objects.get(email=usuario3.email)
 
         data = request.GET.get('dataPedCarona')
