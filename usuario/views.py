@@ -82,8 +82,8 @@ def login_user(request):
 
 def index_usurious(request):
     # query nativa
-    query = "select * from Carona c inner join oferecerCarona o on(c.oferecerCarona_id = o.id)" \
-            "inner join usuario u on(u.id= o.Usuario_id)" \
+    query = "select * from Carona c inner join oferecerCarona o on(c.oferecer_carona_id = o.id)" \
+            "inner join usuario u on(u.id= o.usuario_id)" \
             "where u.id != %s and o.quantidadeVagas > 0 and c.destino = %s  and c.partida = %s and o.dataOfCarona = %s "
     List = None
 

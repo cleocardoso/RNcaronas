@@ -47,8 +47,8 @@ def list_OferecerCarona(request):  # listando os usuarios
     # retornar as minhas caronas
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
-    sql = "SELECT * from Carona c inner join oferecerCarona ofc on(c.oferecerCarona_id = ofc.id) " \
-          "inner join usuario u on(u.id = ofc.Usuario_id) where u.id = %s"
+    sql = "SELECT * from Carona c inner join oferecerCarona ofc on(c.oferecer_carona_id = ofc.id) " \
+          "inner join usuario u on(u.id = ofc.usuario_id) where u.id = %s"
     caronas = Carona.objects.raw(sql, [usuario2.id])
     return render(request, 'listOferecerCarona.html', {'caronas': caronas, 'notificacoes': show_notificacoes(request)})
 

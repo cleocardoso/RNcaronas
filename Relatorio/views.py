@@ -10,7 +10,7 @@ def list_CarnonasData(request):
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
     sql = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecerCarona_id = ofc.id)" \
-          "inner join usuario u on(u.id = ofc.Usuario_id) " \
+          "inner join usuario u on(u.id = ofc.usuario_id) " \
           "where u.id = %s and ofc.dataOfCarona  BETWEEN %s  and %s"
 
     caronas = Carona.objects.raw(sql, [usuario2.id, dataOfCarona, dataPedCarona])
@@ -24,11 +24,11 @@ def set_relatorio_ofCarona(request):
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
     sqlOf = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecerCarona_id = ofc.id)" \
-            "inner join usuario u on(u.id = ofc.Usuario_id) " \
+            "inner join usuario u on(u.id = ofc.usuario_id) " \
             "where u.id = %s and ofc.dataOfCarona  BETWEEN %s  and %s"
 
     sqlPd = "SELECT * from Carona c inner join pedirCarona p on(c.id = p.carona_id)" \
-            " inner join usuario u on(u.id = p.Usuario_id) " \
+            " inner join usuario u on(u.id = p.usuario_id) " \
             "where u.id = %s and p.dataPedCarona  BETWEEN %s  and %s"
 
     caronasOf = Carona.objects.raw(sqlOf, [usuario2.id, dataOfCarona, dataPedCarona])
@@ -44,11 +44,11 @@ def set_relatorio_PedCarona(request):
     usuario2 = usuario.objects.get(email=usuario3.email)
 
     sqlPd = "SELECT * from Carona c inner join pedirCarona ofc on(ofc.carona_id = c.id)  " \
-            " inner join usuario u on(u.id = ofc.Usuario_id) " \
+            " inner join usuario u on(u.id = ofc.usuario_id) " \
             "where u.id = %s and c.partida = %s and c.destino = %s and  ofc.statusConcluido = 1"
 
     sqlOf = "SELECT * from Carona c inner join OferecerCarona ofc on(c.oferecerCarona_id = ofc.id)" \
-            "inner join usuario u on(u.id = ofc.Usuario_id) " \
+            "inner join usuario u on(u.id = ofc.usuario_id) " \
             "where u.id = %s and c.destino = %s and c.partida = %s"
 
     caronasOf = Carona.objects.raw(sqlOf, [usuario2.id, destino, partida])

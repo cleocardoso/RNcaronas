@@ -19,7 +19,7 @@ class pedirCaronaViewSet(viewsets.ModelViewSet):
 
 def pedir_Carona(request):
     sql = "SELECT * from pedirCarona p " \
-          "inner join usuario u on(u.id = p.Usuario_id) " \
+          "inner join usuario u on(u.id = p.usuario_id) " \
           "where u.id = %s"
     usuario3 = request.user
     usuario2 = usuario.objects.get(email=usuario3.email)
@@ -45,7 +45,7 @@ def set_pedirCarona(request, id):
 
             # usuario envia o pedido: pedCarona.Usuario
             # usuario recebe a notificacao: carona.oferecerCarona.Usuario
-            set_notificacao(datetime.now(), "Pedido Solicitado", pedCarona.Usuario, carona.oferecerCarona.Usuario, pedCarona)
+            set_notificacao(datetime.now(), "Pedido Solicitado", pedCarona.usuario, carona.oferecerCarona.usuario, pedCarona)
             messages.success(request, 'Pedido de carona efetuado com sucesso!')
         else:
             messages.error(request, 'Quantidade Insuficiente!')
@@ -65,7 +65,7 @@ def aceitaPedido(request, id):
         oferecerCarona.save()
         pedir.total = int(oferecerCarona.valorCarona) * int(pedir.quantidadeVagas)
         pedir.save()
-        set_notificacao(datetime.now(), "Pedido Aceito", usuario2, pedir.Usuario, pedir)
+        set_notificacao(datetime.now(), "Pedido Aceito", usuario2, pedir.usuario, pedir)
         messages.success(request, 'Pedido aceito com sucesso!')
     return redirect('/pedCaronas/pedirCarona/listPedidoSolicitado')
 
@@ -78,7 +78,7 @@ def recusarPedido(request, id):
         pedir.statusCancelado = True
         pedir.statusAndamento = False
         pedir.save()
-        set_notificacao(datetime.now(), "Pedido Recusado!", usuario2, pedir.Usuario, pedir)
+        set_notificacao(datetime.now(), "Pedido Recusado!", usuario2, pedir.usuario, pedir)
         #messages.success(request, 'Pedido aceito com sucesso!')
     return redirect('/pedCaronas/pedirCarona/listPedidoSolicitado')
 
@@ -88,8 +88,8 @@ def listPedSolicitado(request):
 
     sqlPd = "SELECT * from pedirCarona ofc " \
             "inner join Carona c on(ofc.carona_id = c.id) " \
-            "inner join oferecerCarona cf on(cf.id = c.oferecerCarona_id) " \
-            "inner join usuario u on(u.id = cf.Usuario_id) " \
+            "inner join oferecerCarona cf on(cf.id = c.oferecer_carona_id) " \
+            "inner join usuario u on(u.id = cf.usuario_id) " \
             "where u.id = %s  and  ofc.statusAndamento = 1 and ofc.statusCancelado = 0 "
 
     caronasPd = pedirCarona.objects.raw(sqlPd, [usuario2.id])
