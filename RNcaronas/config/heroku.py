@@ -1,6 +1,6 @@
 import environ
 
-from RNcaronas.settings import *
+from RNcaronas.config.base import *
 
 env = environ.Env()
 
