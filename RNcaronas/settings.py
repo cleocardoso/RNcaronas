@@ -29,6 +29,7 @@ SECRET_KEY = 'lz!_#eyc487pt9^6g3i(5u%xfe&kg)z^1bo%5*6-&lo)3$y!@h'
 DEBUG = True
 
 ALLOWED_HOSTS = ['rncaronas.herokuapp.com ']
+#ALLOWED_HOSTS = ['*']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

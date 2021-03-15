@@ -90,14 +90,12 @@ def index_usurious(request):
     destino = request.GET.get('destino')
     partida = request.GET.get('partida')
     usuario3 = request.user
-
-    if usuario3:
+    if len(str(usuario3.username)) > 0:
         usuario2 = usuario.objects.get(email=usuario3.email)
 
         data = request.GET.get('dataPedCarona')
         if destino and partida and data and usuario2:
             List = Carona.objects.raw(query, [usuario2.id, destino, partida, data])
-
 
     return render(request, 'index.html', {'List': List, 'notificacoes': show_notificacoes(request)})
 
