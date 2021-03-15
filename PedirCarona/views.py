@@ -91,7 +91,7 @@ def listPedSolicitado(request):
             "inner join carona c on(ofc.carona_id = c.id) " \
             "inner join oferecer_carona cf on(cf.id = c.oferecer_carona_id) " \
             "inner join usuario u on(u.id = cf.usuario_id) " \
-            "where u.id = %s  and  ofc.status_andamento = 1 and ofc.status_cancelado = 0 "
+            "where u.id = %s  and  ofc.status_andamento = '1' and ofc.status_cancelado = '0' "
 
     caronasPd = pedirCarona.objects.raw(sqlPd, [usuario2.id])
 
