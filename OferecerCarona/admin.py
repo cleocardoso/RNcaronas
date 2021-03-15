@@ -6,4 +6,4 @@ from OferecerCarona.models import oferecerCarona
 
 @admin.register(oferecerCarona)
 class OferecerCaronaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'valorCarona']
+    list_display = ['id', 'valor_carona']

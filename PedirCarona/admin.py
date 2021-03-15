@@ -6,4 +6,4 @@ from PedirCarona.models import pedirCarona
 
 @admin.register(pedirCarona)
 class PedirCaronaAdmin(admin.ModelAdmin):
-   list_display = ['id', 'quantidadeVagas']
+   list_display = ['id', 'quantidade_vagas']
